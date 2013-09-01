@@ -1,0 +1,13 @@
+<li>
+  <label for="poll_question_value">Question</label>
+  <textarea id="poll_question_value" name="poll[questions_attributes][<%= question_num %>][value]" ><%= question.escape("value") %></textarea>
+  <% if(question.get("answers")){ %>
+     <% var answer_num = 0 %>
+     <ul>
+    <%  question.get("answers").each( function (answer) { %>
+    <%= JST["polls/question_answer_form_part"]({answer: answer, answer_num: answer_num, question_num: question_num }) %>
+    <% }); %>
+     </ul>
+  <% } %>
+  <input type="button" value="Add Answer Choice" id="addAnswer" data-question-num="<%= question_num %>" >
+</li>

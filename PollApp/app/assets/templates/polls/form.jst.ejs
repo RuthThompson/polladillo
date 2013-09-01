@@ -1,0 +1,18 @@
+<% submitValue = poll.isNew() ? "Create" : "Update" ; %>
+<form id="editPoll">
+
+  <label for="poll_title">Title</label>
+  <input id="poll_title" value="<%= poll.escape("title")%>" name="poll[title]">
+  <% if(poll.get("questions")){ %>
+     <% var question_num = 0 %>
+     <ul>
+    <%  poll.get("questions").each( function (question) { %>
+    <%= JST["polls/question_form_part"]({question: question, question_num: question_num ++ }) %>
+    <% }); %>
+     </ul>
+  <% } %>
+  <input type="button" value="Add Question" id="addQuestion">
+ 
+  <input type="button" value="<%= submitValue %>" id="savePoll" >
+
+</form>

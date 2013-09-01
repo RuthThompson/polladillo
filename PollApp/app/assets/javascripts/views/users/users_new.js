@@ -3,7 +3,7 @@ PollApp.Views.NewUser = Backbone.View.extend({
     "submit #editUser": "newUser"
   }, 
 
-  template: JST['users/new'], 
+  template: JST['users/form'], 
   
   render: function () {
     this.$el.html(this.template({user: this.model}))
@@ -15,8 +15,14 @@ PollApp.Views.NewUser = Backbone.View.extend({
     event.preventDefault();
     data = $(event.currentTarget).serializeJSON()
     this.model.save(data.user, {
-       success: Backbone.history.navigate("#/users/:user_id"), 
-       failure: console.log("failure -- ruth make an errors view")
+       success: function(data){
+         PollApp.currentUser = data;
+         Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
+        }, 
+        error: function(responseObj){
+          console.log("failure -- ruth make an errors view");
+          console.log(responseObj);
+        }
     });
 
   }

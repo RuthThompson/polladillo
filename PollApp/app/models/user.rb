@@ -31,6 +31,13 @@ class User < ActiveRecord::Base
     self.session_token
   end
   
+  def as_json(opts)
+    opts[:only] = ["username", "id"]
+    super(opts)
+  end
+  
+  private
+  
   def generate_session_token
     SecureRandom::urlsafe_base64(31)
   end
