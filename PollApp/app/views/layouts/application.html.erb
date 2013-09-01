@@ -7,8 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= render :partial => "root/bootstrapped_data"%>
+<%= render :partial => "layouts/header" %>
+<div id="content">
 <%= yield %>
-
+</div>
 </body>
 </html>

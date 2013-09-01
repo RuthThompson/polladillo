@@ -1,0 +1,10 @@
+<div id="header">
+	<h1>Polladillo</h1>
+	<% if logged_in? %>
+	 <p>
+		Hello <%= current_user.username %> <%= button_to "Log out", new_session_url, :method => :delete %>
+		</p>
+	<% else %>
+	<%= button_to "Log in", new_session_url %>
+	<% end %>
+</div>
