@@ -1,0 +1,7 @@
+<li data-answer-num="<%= answerNum %>">
+<% if(!answer.isNew()){ %>
+  <input type="hidden" name="poll[questions_attributes][<%= questionNum %>][answers_attributes][<%= answerNum %>][id]" value="<%= answer.id %>" >
+<% } %>
+  <input type="text" name="poll[questions_attributes][<%= questionNum %>][answers_attributes][<%= answerNum %>][value]" value="<%= answer.escape("value") %>" >
+  <input type="button" class="removeAnswer" value="X" data-answer-num="<%= answerNum %>" data-question-num="<%= questionNum %>" >
+</li>
