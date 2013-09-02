@@ -14,17 +14,18 @@ PollApp.Views.PollsVote = Backbone.View.extend({
   
   votePoll: function () {
     var data =$('#votePoll').serializeJSON();
-    var votes = new PollApp.Collections.Votes(data.votes);
+    var votes = new PollApp.Collections.Votes();
     var opts = {
        success: function (data) {
-         Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
+         console.log(data)
+       //  Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
         }, 
         error: function (responseObj) {
           console.log("failure -- ruth make an errors view");
           console.log(responseObj);
         }
     }
-    votes.sync(data, opts)
+    votes.create(data, opts)
   }
 
 });

@@ -5,7 +5,8 @@ PollApp.Routers.Main = Backbone.Router.extend({
     "users/:user_id": "showUser", 
     "polls/new": "newPoll", 
     "polls/:poll_id/edit": "editPoll", 
-    "polls/:poll_id/vote": "votePoll"
+    "polls/:poll_id/vote": "votePoll", 
+    "polls/:poll_id/results": "tallyPoll"
   }, 
   
   initialize: function (opts) {
@@ -45,6 +46,14 @@ PollApp.Routers.Main = Backbone.Router.extend({
     var that = this; 
     this._withPoll(poll_id, function (poll) {
       var view = new PollApp.Views.PollsVote({model: poll});
+      that._renderView(view);
+    });
+  },
+  
+  tallyPoll: function (poll_id){
+    var that = this; 
+    this._withPoll(poll_id, function (poll) {
+      var view = new PollApp.Views.PollsResults({model: poll});
       that._renderView(view);
     });
   },

@@ -1,11 +1,11 @@
 class PollsController < ApplicationController
   #before_filter :require_login
   def index
-    @polls = current_user.polls.includes(:questions => [:answers])
+    @polls = current_user.polls.includes(:questions => [:answers => [:votes]])
   end
   
   def show
-    @poll = Poll.includes(:questions => [:answers]).find(params[:id])
+    @poll = Poll.includes(:questions => [:answers => [:votes]]).find(params[:id])
   end
   
   def create
@@ -19,7 +19,7 @@ class PollsController < ApplicationController
   end
   
   def update
-      @poll = Poll.includes(:questions => [:answers]).find(params[:id])
+      @poll = Poll.includes(:questions => [:answers => [:votes]]).find(params[:id])
       @poll.assign_attributes(params[:poll])
       @poll.user_id = current_user.id
       if @poll.save

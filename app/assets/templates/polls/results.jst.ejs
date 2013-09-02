@@ -1,5 +1,5 @@
-<h1><%= poll.escape("title") %></h1>
-<form id="votePoll">
+<h1><%= poll.escape("title") %> Real Time Results</h1>
+
 <ul>
  <% if(poll.get("questions")){ %>
     <% var question_num = 0 %>
@@ -10,8 +10,7 @@
         <% if(question.get("answers")){ %>
           <% question.get("answers").each(function (answer) { %>
             <li>
-              <input type="radio" name="votes[<%= question_num %>][answer_id]" value="<%= answer.id %>" id="votes_<%= question_num %>_<%= answer.id %>">
-              <label for="votes_<%= question_num %>_<%= answer.id %>"><%= answer.escape("value") %></label>
+              <%= answer.escape("value") %>:<%= answer.escape("votes") %>
             </li>
           <% }); %>
         <% } %>
@@ -21,5 +20,3 @@
     <% }); %>
   <% } %>
 </ul>
-<input type="button" value="Vote" id="submitVote">
-</form>
