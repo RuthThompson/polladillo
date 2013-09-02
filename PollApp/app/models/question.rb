@@ -7,5 +7,5 @@ class Question < ActiveRecord::Base
   has_one :user, :through => :poll
   has_many :answers, :dependent => :destroy, :inverse_of => :question
   
-  accepts_nested_attributes_for :answers
+  accepts_nested_attributes_for :answers, :allow_destroy => true
 end

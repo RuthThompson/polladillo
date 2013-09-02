@@ -1,13 +1,18 @@
-<li>
+<li data-question-num="<%= questionNum %>">
+<% if(!question.isNew()){ %>
+   <input type="hidden" name="poll[questions_attributes][<%= questionNum %>][id]" value="<%= question.id %>" >
+<% } %> 
   <label for="poll_question_value">Question</label>
-  <textarea id="poll_question_value" name="poll[questions_attributes][<%= question_num %>][value]" ><%= question.escape("value") %></textarea>
+  <textarea id="poll_question_value" name="poll[questions_attributes][<%= questionNum %>][value]" ><%= question.escape("value") %></textarea>
+  <input type="button" class="removeQuestion" value="X" data-question-num="<%= questionNum %>" >
+  <ul id="answers-<%= questionNum %>" class="answers" >
   <% if(question.get("answers")){ %>
-     <% var answer_num = 0 %>
-     <ul>
+     <% var answerNum = 0 %>
     <%  question.get("answers").each( function (answer) { %>
-    <%= JST["polls/question_answer_form_part"]({answer: answer, answer_num: answer_num, question_num: question_num }) %>
+    <%= JST["polls/question_answer_form_part"]({answer: answer, answerNum: answerNum, questionNum: questionNum }) %>
+    <% answerNum ++ %>
     <% }); %>
-     </ul>
   <% } %>
-  <input type="button" value="Add Answer Choice" id="addAnswer" data-question-num="<%= question_num %>" >
+  </ul>
+  <input type="button" value="Add Answer Choice" class="addAnswer" data-question-num="<%= questionNum %>" >
 </li>

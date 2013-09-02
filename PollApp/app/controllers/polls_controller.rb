@@ -5,7 +5,7 @@ class PollsController < ApplicationController
   end
   
   def show
-    @poll = Poll.find(params[:id])
+    @poll = Poll.includes(:questions => [:answers]).find(params[:id])
   end
   
   def create
@@ -18,8 +18,15 @@ class PollsController < ApplicationController
     end
   end
   
-  def edit
-    
+  def update
+      @poll = Poll.includes(:questions => [:answers]).find(params[:id])
+      @poll.assign_attributes(params[:poll])
+      @poll.user_id = current_user.id
+      if @poll.save #is there an n+1 query happening here 'cause of the show page looping through questions and answers?
+        render :show
+      else
+        render :json => @poll.errors.full_messages, :status => 422
+      end
   end
   
   def destroy
