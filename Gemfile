@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'backbone-on-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'rabl'
+gem 'figaro'
 
 
 group :assets do
