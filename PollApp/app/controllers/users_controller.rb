@@ -10,8 +10,7 @@ class UsersController < ApplicationController
       login(@user)
       render :json => @user
     else
-      @errors = ["Incorrect email or password"]
-      render :json => @errors
+      render :json => @user.errors.full_messages
     end
   end
   

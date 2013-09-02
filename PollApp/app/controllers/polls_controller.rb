@@ -22,7 +22,7 @@ class PollsController < ApplicationController
       @poll = Poll.includes(:questions => [:answers]).find(params[:id])
       @poll.assign_attributes(params[:poll])
       @poll.user_id = current_user.id
-      if @poll.save #is there an n+1 query happening here 'cause of the show page looping through questions and answers?
+      if @poll.save
         render :show
       else
         render :json => @poll.errors.full_messages, :status => 422
