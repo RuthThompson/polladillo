@@ -1,0 +1,22 @@
+<h1><%= poll.escape("title") %></h1>
+<ul>
+ <% if(poll.get("questions")){ %>
+    <% poll.get("questions").each(function (question) { %>
+      <li>
+      <h3><%= question.escape("value") %></h3>
+        <ul>
+        <form>
+        <% if(question.get("answers")){ %>
+          <% question.get("answers").each(function (answer) { %>
+            <li>
+              <input type="radio" name="vote[<%= question.id %>]" value="<%= answer.id %>" id="vote_<%= question.id %>_<%= answer.id %>">
+              <label for="vote_<%= question.id %>_<%= answer.id %>"><%= answer.escape("value") %></label>
+            </li>
+          <% }); %>
+        <% } %>
+        </form>
+        </ul>
+      </li>
+    <% }); %>
+  <% } %>
+</ul>

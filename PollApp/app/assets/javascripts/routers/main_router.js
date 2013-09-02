@@ -47,7 +47,7 @@ PollApp.Routers.Main = Backbone.Router.extend({
       var view = new PollApp.Views.PollsVote({model: poll});
       that._renderView(view);
     });
-  }
+  },
    
   _renderView: function (view) {
     if(this.currentView){
