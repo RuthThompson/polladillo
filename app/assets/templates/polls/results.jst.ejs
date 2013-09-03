@@ -8,11 +8,9 @@
       <h3><%= question.escape("value") %></h3>
         <ul>
         <% if(question.get("answers")){ %>
-          <% question.get("answers").each(function (answer) { %>
-            <li>
-              <%= answer.escape("value") %>:<%= answer.escape("votes") %>
-            </li>
-          <% }); %>
+          <li>
+          <div id="question_<%= question.id %>_bar_graph" class="bar_graph"></div>
+          </li>
         <% } %>
         </ul>
       </li>

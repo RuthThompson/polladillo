@@ -15,6 +15,7 @@
 //= require underscore
 //= require backbone
 //= require jquery.serializeJSON
+//= require chart.js
 //= require poll_app
 //= require_tree ../templates
 //= require_tree ./models
