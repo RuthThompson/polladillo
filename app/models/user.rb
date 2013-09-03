@@ -13,11 +13,14 @@ class User < ActiveRecord::Base
   include BCrypt
   
   def self.authenticate(email, password)
-    self.find_by_email_and_password(email, password)
+    user = User.find_by_email(email)
+    if user && user.password == password
+      return user
+    end
   end
   
   def password
-    @password ||= Password.create(password_hash)
+    @password ||= Password.new(password_hash)
   end
   
   def password=(new_password)

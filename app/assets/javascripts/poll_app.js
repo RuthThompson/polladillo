@@ -6,7 +6,8 @@ window.PollApp = {
   initialize: function() {
     PollApp.currentUser = new PollApp.Models.User(JSON.parse($("#currentUser").html()));
     var $rootEl = $("#content")
-    this.router = new PollApp.Routers.Main({$rootEl:$rootEl});
+    var $headerEl = $("#header")
+    this.router = new PollApp.Routers.Main({$rootEl:$rootEl, $headerEl: $headerEl});
     Backbone.history.start();
   }
 };

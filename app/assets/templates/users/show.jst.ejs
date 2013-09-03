@@ -1,3 +1,4 @@
-<p>hi<%= user.escape("username") %></p>
+<p>hi <%= user.escape("username") %></p>
+<a href="#/polls/new" >New Poll</a> <a href="#/users/">Edit Account</a>
 <p>Your Polls</p>
 <%= JST["polls/index"]({polls: polls}) %>

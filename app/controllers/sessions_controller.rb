@@ -5,19 +5,19 @@ class SessionsController < ApplicationController
   end
   
   def create
+    p params[:user]
     @user = User.authenticate(params[:user][:email], params[:user][:password])
     if @user
       login(@user)
-      redirect_to user_url(@user)
+      render :json => @user
     else
-      flash[:errors] ||= []
-      flash[:errors] << "Incorrect email or password"
-      redirect_to new_session_url
+      errors = {errors => ["Incorrect email or password"]}
+      render :json => errors, :status => 422 # send the errors as a hash
     end
   end
   
   def destroy
     logout
-    redirect_to new_session_url
+    render :nothing => true
   end
 end

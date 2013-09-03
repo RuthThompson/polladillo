@@ -21,7 +21,7 @@ module SessionsHelper
   
   def require_login
     if !logged_in?
-      redirect_to new_session_url
+      render :json => "Forbidden", :status => :forbidden
     end
   end
   

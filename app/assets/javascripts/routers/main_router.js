@@ -1,9 +1,10 @@
 PollApp.Routers.Main = Backbone.Router.extend({
   routes: {
     "": "home",
-    "users/new": "newUser", 
+    "signup": "newUser", 
     "users/:user_id": "showUser", 
-    "polls/new": "newPoll", 
+    "users/:user_id/edit": "editUser",
+    "polls/new": "newPoll",
     "polls/:poll_id/edit": "editPoll", 
     "polls/:poll_id/vote": "votePoll", 
     "polls/:poll_id/results": "tallyPoll"
@@ -11,6 +12,13 @@ PollApp.Routers.Main = Backbone.Router.extend({
   
   initialize: function (opts) {
     this.$rootEl = opts.$rootEl;
+    this.$headerEl = opts.$headerEl;
+    this.createLayout();
+  },
+  
+  createLayout: function(){
+    var header = new PollApp.Views.TopStripe();
+    this.$headerEl.html(header.render().$el)
   },
   
   newUser: function () {

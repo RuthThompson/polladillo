@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  #before_filter :require_login
+  before_filter :require_login, :except => :show
   def index
     @polls = current_user.polls.includes(:questions => [:answers => [:votes]])
   end
