@@ -1,10 +1,15 @@
 PollApp.Views.TopStripe = Backbone.View.extend({
   events: {
     "click #logOut": "logOut", 
-    "submit #topStripeLogIn" : "logIn"
+    "submit #topStripeLogIn" : "logIn", 
+    "click #logInWithFacebook" : "logInWithFacebook"
   }, 
 
   template: JST['layout/top_stripe'], 
+  
+  initialize: function () {
+
+  },
   
   render: function () {
     this.$el.html(this.template())
@@ -28,7 +33,6 @@ PollApp.Views.TopStripe = Backbone.View.extend({
   
   logIn: function (event) {
     event.preventDefault();
-    console.log("here")
     var that = this; 
     var data = $("#topStripeLogIn").serializeJSON();
     $.ajax({
@@ -42,6 +46,23 @@ PollApp.Views.TopStripe = Backbone.View.extend({
       },
       error: console.log("ruth make an error message")
     })
-  }
+  }, 
+  
+  logInWithFacebook: function (event) {
+     event.preventDefault();
+     var that = this; 
+           $.ajax({
+           url: "/auth/facebook",
+           success: function (data) {
+             PollApp.currentUser = new PollApp.Models.User(data)
+             PollApp.router.reRenderCurrentView();
+             that.render();
+           },
+           error: console.log("ruth make an error message")
+         })
+          
+  },
+  
+  
 
 });

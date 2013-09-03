@@ -6,5 +6,6 @@ PollApp::Application.routes.draw do
   resources :votes, :only => [:create]
   resource :session, :only => [:create, :destroy, :new]
   
+  get '/auth/:provider/callback', to: 'sessions#o_create'
   root :to => "root#root"
 end

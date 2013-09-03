@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130831212227) do
+ActiveRecord::Schema.define(:version => 20130903193425) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id", :null => false
@@ -21,6 +21,23 @@ ActiveRecord::Schema.define(:version => 20130831212227) do
   end
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+
+  create_table "authorizations", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "user_id"
+    t.string   "token"
+    t.string   "secret"
+    t.string   "name"
+    t.string   "link"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "authorizations", ["email"], :name => "index_authorizations_on_email"
+  add_index "authorizations", ["uid"], :name => "index_authorizations_on_uid"
+  add_index "authorizations", ["user_id"], :name => "index_authorizations_on_user_id"
 
   create_table "polls", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -43,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20130831212227) do
   create_table "users", :force => true do |t|
     t.string   "email",         :null => false
     t.string   "username",      :null => false
-    t.string   "password_hash", :null => false
+    t.string   "password_hash"
     t.string   "session_token", :null => false
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false

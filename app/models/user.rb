@@ -1,24 +1,50 @@
 require 'bcrypt'
 class User < ActiveRecord::Base
-  attr_accessible :password_hash, :session_token, :username, :email, :password
-  validates :session_token, :password_hash, :username, :email, :presence => true
+  attr_accessible :password_hash, :session_token, :username, :email, :password, :authorizations_attributes
+  validates :session_token, :username, :email, :presence => true
   validates :email, :uniqueness => true
   before_validation :ensure_session_token
-  
+  has_many :authorizations, :dependent => :destroy
   
   has_many :polls, :dependent => :destroy
   has_many :questions, :through => :polls
   has_many :answers, :through => :questions
   
+  accepts_nested_attributes_for :authorizations
+  
   include BCrypt
   
-  def self.authenticate(email, password)
-    user = User.find_by_email(email)
-    if user && user.password == password
-      return user
+  def self.authenticate_by_email_and_password(email, password)
+    unless password.nil?
+      user = User.find_by_email(email)
+      if user && user.password == password
+        return user
+      end
     end
   end
   
+  def self.authenticate_or_create_by_facebook(auth_hash)
+    uid = auth_hash['uid']
+    email = auth_hash[:info][:email]
+    name = auth_hash[:info][:name]
+    
+    authorization = Authorization.find_by_uid(uid)
+    if authorization
+      user = authorization.user
+    else
+      user = User.new(  :username => name, 
+                        :email => email, 
+                        :authorizations_attributes => [{
+                          :provider => "facebook",
+                          :uid => uid, 
+                          :name => name, 
+                          :email => email,
+                        }]
+                      );
+    end
+    return user
+  end
+
   def password
     @password ||= Password.new(password_hash)
   end
