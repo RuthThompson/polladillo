@@ -44,7 +44,7 @@ PollApp.Routers.Main = Backbone.Router.extend({
   
   editPoll: function (poll_id) {
     var that = this;
-    this._withPoll(poll_id, function(poll){ 
+    this._withCurrentUserPoll(poll_id, function(poll){ 
       var view = new PollApp.Views.PollsForm({model: poll});
       that._renderView(view);
     });
@@ -66,6 +66,12 @@ PollApp.Routers.Main = Backbone.Router.extend({
     });
   },
    
+  reRenderCurrentView: function () {
+    if(this.currentView){
+      this.$rootEl.html(this.currentView.render().$el);
+    } 
+  },
+  
   _renderView: function (view) {
     if(this.currentView){
       this.currentView.remove();
@@ -74,7 +80,12 @@ PollApp.Routers.Main = Backbone.Router.extend({
     this.$rootEl.html(view.render().$el);
   }, 
   
-  _withPoll: function (poll_id, callback) {
+  _withPoll : function (poll_id, callback) {
+    poll = new PollApp.Models.Poll({id: poll_id});
+    poll.fetch({success: callback});
+  },
+  
+  _withCurrentUserPoll: function (poll_id, callback) {
     this._withCurrentUserPolls( function(){
       var poll = PollApp.currentUserPolls.get(poll_id);
       if(!poll){

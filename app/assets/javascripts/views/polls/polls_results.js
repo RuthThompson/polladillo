@@ -17,11 +17,17 @@ PollApp.Views.PollsResults = Backbone.View.extend({
       var ctx = $canvas.get(0).getContext('2d');
       that.$("#question_" + question.id + "_bar_graph").html($canvas);
       var labels = [];
-      var data = []
+      var data = [];
+      
       question.get("answers").each(function(answer){
         labels.push(answer.escape("value"));
         data.push(answer.get("votes"))
       })
+      
+      var datamax = data.slice(0).sort()[data.length-1];
+      var scaleSteps = Math.ceil(datamax/10);
+      var scaleStepWidth = Math.ceil(datamax/scaleSteps);
+      
       var data = {
         labels : labels,  
         datasets : [{
@@ -30,7 +36,14 @@ PollApp.Views.PollsResults = Backbone.View.extend({
           data : data
         }]
       }
-      new Chart(ctx).Bar(data)
+
+      var options = {
+        	scaleOverride : true,
+        	scaleSteps : scaleSteps,
+        	scaleStepWidth : scaleStepWidth,
+        	scaleStartValue : 0,
+      }
+      new Chart(ctx).Bar(data, options)
     });
   }
 });

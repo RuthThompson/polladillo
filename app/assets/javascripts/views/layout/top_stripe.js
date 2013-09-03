@@ -18,7 +18,8 @@ PollApp.Views.TopStripe = Backbone.View.extend({
       method: "DELETE",
       success: function (data) {
         PollApp.currentUser = new PollApp.Models.User();
-        that.render();
+        PollApp.router.reRenderCurrentView();
+        that.render(); 
       }, 
       error: console.log("ruth make an error message")
     })
@@ -36,6 +37,7 @@ PollApp.Views.TopStripe = Backbone.View.extend({
       data: data, 
       success: function (data) {
         PollApp.currentUser = new PollApp.Models.User(data)
+        PollApp.router.reRenderCurrentView();
         that.render();
       },
       error: console.log("ruth make an error message")
