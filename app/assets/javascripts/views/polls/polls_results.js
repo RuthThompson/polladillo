@@ -3,6 +3,7 @@ PollApp.Views.PollsResults = Backbone.View.extend({
   initialize: function (){
     var that = this; 
     this.listenTo(that.model, 'change', that.drawGraphs);
+    this.listenForUpdates();
   },
   render: function () {
     this.$el.html(this.template({poll: this.model}))
@@ -38,12 +39,22 @@ PollApp.Views.PollsResults = Backbone.View.extend({
       }
 
       var options = {
-        	scaleOverride : true,
-        	scaleSteps : scaleSteps,
-        	scaleStepWidth : scaleStepWidth,
-        	scaleStartValue : 0,
+             scaleShowGridLines: false,
+             scaleShowLabels: false, 
+             animation: false, 
       }
       new Chart(ctx).Bar(data, options)
     });
-  }
+  }, 
+  
+  listenForUpdates: function () {
+        var pusher = new Pusher('beb17ccd0585f1c87905');
+        var channel = pusher.subscribe('poll_' + this.model.id );
+        var that = this
+        channel.bind('updated', function(data) {
+          poll_data = that.model.parse(JSON.parse(data.poll))  
+          that.model.set(poll_data)
+          that.render();
+        });
+   }
 });

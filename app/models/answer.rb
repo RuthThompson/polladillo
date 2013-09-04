@@ -3,7 +3,7 @@ class Answer < ActiveRecord::Base
   validates :value, :presence => true
   validates_presence_of :question
   
-  has_many :votes, :dependent => :destroy
+  has_many :votes, :dependent => :destroy, :inverse_of => :answer
   belongs_to :question, :inverse_of => :answers
   has_one :user, :through => :question
   

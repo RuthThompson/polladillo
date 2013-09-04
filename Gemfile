@@ -9,6 +9,8 @@ gem 'rabl'
 gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'pusher'
+gem 'twilio-ruby'
 
 
 group :assets do
