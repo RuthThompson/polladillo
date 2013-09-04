@@ -18,15 +18,9 @@ PollApp.Views.TopStripe = Backbone.View.extend({
   
   logOut: function (event) {
     var that = this; 
-    $.ajax({
-      url: "session",
-      method: "DELETE",
-      success: function (data) {
-        PollApp.currentUser = new PollApp.Models.User();
-        PollApp.router.reRenderCurrentView();
-        that.render(); 
-      }, 
-      error: console.log("ruth make an error message")
+    PollApp.currentUser.logOut({
+      success: that.render.bind(that), 
+      error: that.writeErrors
     })
     
   },
@@ -35,33 +29,24 @@ PollApp.Views.TopStripe = Backbone.View.extend({
     event.preventDefault();
     var that = this; 
     var data = $("#topStripeLogIn").serializeJSON();
-    $.ajax({
-      url: "session",
-      method: "POST",
-      data: data, 
-      success: function (data) {
-        PollApp.currentUser = new PollApp.Models.User(data)
-        PollApp.router.reRenderCurrentView();
-        that.render();
-      },
-      error: console.log("ruth make an error message")
-    })
+    PollApp.currentUser.logIn(data, {
+      success: that.render.bind(that), 
+      error: that.writeErrors
+    });
   }, 
   
   logInWithFacebook: function (event) {
      event.preventDefault();
      var that = this; 
-           $.ajax({
-           url: "/auth/facebook",
-           success: function (data) {
-             PollApp.currentUser = new PollApp.Models.User(data)
-             PollApp.router.reRenderCurrentView();
-             that.render();
-           },
-           error: console.log("ruth make an error message")
-         })
-          
+     PollApp.currentIser.logInWithFacebook({
+       success: that.render.bind(that), 
+       error: that.writeErrors
+     });
   },
+  
+  writeErrors: function () {
+    console.log("ruth make errors")
+  }
   
   
 

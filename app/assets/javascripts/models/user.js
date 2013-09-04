@@ -1,3 +1,45 @@
 PollApp.Models.User = Backbone.Model.extend({
-  urlRoot: "users"
+  urlRoot: "users", 
+  
+  logOut: function (opts) {
+    $.ajax({
+      url: "session",
+      method: "DELETE",
+      success: function (data) {
+        PollApp.currentUser = new PollApp.Models.User();
+        PollApp.router.reRenderCurrentView();
+        opts.success();
+      }, 
+      error: opts.error
+    });
+    
+  },
+  
+  logIn: function (user_data, opts) {
+    $.ajax({
+      url: "session",
+      method: "POST",
+      data: user_data, 
+      success: function (data) {
+        PollApp.currentUser = new PollApp.Models.User(data)
+        PollApp.router.reRenderCurrentView();
+        opts.success();
+      },
+      error: opts.error
+    })
+  }, 
+  
+  logInWithFacebook: function (opts) {
+     event.preventDefault();
+     $.ajax({
+       url: "/auth/facebook",
+       success: function (data) {
+         PollApp.currentUser = new PollApp.Models.User(data)
+         PollApp.router.reRenderCurrentView();
+         opts.success();
+       },
+       error: opts.error
+     })
+          
+  },
 });
