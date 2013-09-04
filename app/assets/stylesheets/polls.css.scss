@@ -1,6 +1,36 @@
 // Place all the styles related to the Polls controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$blue1: #0d5bff; 
+$blue2: #276cff;
+$yellow: #ffb60d;
+$brown: #b27c00;
+
+body{
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+
 .hidden{
   display:none;
+}
+
+
+#header{
+  .clearfix{}
+  background: $blue2;
+  color: #fff;
+  padding: 15px;
+  #header-logo{
+    float:left;
+    width:50%;
+    h1{
+      font-size: 35px;
+    }
+  }
+  #header-login{
+    width:25%;
+    float:right;
+    width:200px;
+  }
 }
