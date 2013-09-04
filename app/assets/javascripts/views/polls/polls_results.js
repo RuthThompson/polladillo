@@ -3,7 +3,7 @@ PollApp.Views.PollsResults = Backbone.View.extend({
   initialize: function (){
     var that = this; 
     this.listenTo(that.model, 'change', that.drawGraphs);
-    this.listenForUpdates();
+    this.model.listenForUpdates();
   },
   render: function () {
     this.$el.html(this.template({poll: this.model}))
@@ -14,7 +14,8 @@ PollApp.Views.PollsResults = Backbone.View.extend({
   drawGraphs: function(){
     var that = this;
     this.model.get("questions").each(function(question){
-      var $canvas = $('<canvas id="barGraph' + question.id + '" width="400" height="400"></canvas>');
+      var width = 400
+      var $canvas = $('<canvas id="barGraph' + question.id + '" width="400" height="200"></canvas>');
       var ctx = $canvas.get(0).getContext('2d');
       that.$("#question_" + question.id + "_bar_graph").html($canvas);
       var labels = [];
@@ -26,8 +27,8 @@ PollApp.Views.PollsResults = Backbone.View.extend({
       })
       
       var datamax = data.slice(0).sort()[data.length-1];
-      var scaleSteps = Math.ceil(datamax/10);
-      var scaleStepWidth = Math.ceil(datamax/scaleSteps);
+      var scaleSteps = datamax < 10 ? 10 : Math.ceil(datamax/10);
+      var scaleStepWidth = datamax < 10 ? 1: Math.ceil(datamax/scaleSteps);
       
       var data = {
         labels : labels,  
@@ -40,21 +41,14 @@ PollApp.Views.PollsResults = Backbone.View.extend({
 
       var options = {
              scaleShowGridLines: false,
-             scaleShowLabels: false, 
+             scaleOverride: true,
+             scaleSteps: scaleSteps,
+             scaleStepWidth: scaleStepWidth,
+             scaleStartValue: 0,
              animation: false, 
       }
       new Chart(ctx).Bar(data, options)
     });
-  }, 
+  }
   
-  listenForUpdates: function () {
-        var pusher = new Pusher('beb17ccd0585f1c87905');
-        var channel = pusher.subscribe('poll_' + this.model.id );
-        var that = this
-        channel.bind('updated', function(data) {
-          poll_data = that.model.parse(JSON.parse(data.poll))  
-          that.model.set(poll_data)
-          that.render();
-        });
-   }
 });
