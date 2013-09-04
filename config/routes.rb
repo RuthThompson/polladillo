@@ -1,6 +1,9 @@
 PollApp::Application.routes.draw do
   resources :users
   resources :polls do
+    member do
+      post 'email', to: 'polls#email'
+    end
     resources :votes, :only => [:index]
   end
   resources :votes, :only => [:create]

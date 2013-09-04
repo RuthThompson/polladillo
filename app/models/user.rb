@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   end
   
   def as_json(opts)
-    opts[:only] = ["username", "id"]
+    opts[:only] = ["username", "id", "email"]
     super(opts)
   end
   

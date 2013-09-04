@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+	<h3>Hey Friend,</h3> 
+	<p>
+	Come take my poll at Polladillo!
+	<h3><%= link_to @poll.title, "http://polladillo.com/#/polls/#{ @poll.id }/vote"%></h3>
+	 Sent to you by <%= @poll.user.username %> (<%= @poll.user.email%>)
+	</p>
+</body>
+</html>

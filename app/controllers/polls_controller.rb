@@ -18,6 +18,19 @@ class PollsController < ApplicationController
     end
   end
   
+  def email
+    @poll = Poll.find_by_id_and_user_id(params[:emails][:poll_id], current_user.id)
+    if @poll && params[:emails][:friend_emails]
+      friend_emails = params[:emails][:friend_emails].split(",").map(&:strip).first(10)
+      p friend_emails
+      friend_emails
+      FriendMailer.friend_email(@poll, friend_emails).deliver!
+      render :nothing => true
+    else
+      render :nothing => true, :status => 422
+    end
+  end
+  
   def update
       @poll = Poll.includes(:questions => [:answers => [:votes]]).find(params[:id])
       @poll.assign_attributes(params[:poll])
