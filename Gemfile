@@ -11,6 +11,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'pusher'
 gem 'twilio-ruby'
+gem 'flatui-rails'
 
 
 group :assets do
