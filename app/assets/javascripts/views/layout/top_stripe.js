@@ -19,7 +19,10 @@ PollApp.Views.TopStripe = Backbone.View.extend({
   logOut: function (event) {
     var that = this; 
     PollApp.currentUser.logOut({
-      success: that.render.bind(that), 
+      success: function() {
+        PollApp.router.reRenderCurrentView();
+        that.render();
+      }, 
       error: that.writeErrors
     })
     
@@ -30,7 +33,10 @@ PollApp.Views.TopStripe = Backbone.View.extend({
     var that = this; 
     var data = $("#topStripeLogIn").serializeJSON();
     PollApp.currentUser.logIn(data, {
-      success: that.render.bind(that), 
+      success: function() {
+        PollApp.router.reRenderCurrentView();
+        that.render();
+      },
       error: that.writeErrors
     });
   }, 
@@ -39,7 +45,10 @@ PollApp.Views.TopStripe = Backbone.View.extend({
      event.preventDefault();
      var that = this; 
      PollApp.currentIser.logInWithFacebook({
-       success: that.render.bind(that), 
+      success: function() {
+         PollApp.router.reRenderCurrentView();
+         that.render();
+       },
        error: that.writeErrors
      });
   },

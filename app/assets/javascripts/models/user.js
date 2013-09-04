@@ -7,7 +7,6 @@ PollApp.Models.User = Backbone.Model.extend({
       method: "DELETE",
       success: function (data) {
         PollApp.currentUser = new PollApp.Models.User();
-        PollApp.router.reRenderCurrentView();
         opts.success();
       }, 
       error: opts.error
@@ -22,7 +21,6 @@ PollApp.Models.User = Backbone.Model.extend({
       data: user_data, 
       success: function (data) {
         PollApp.currentUser = new PollApp.Models.User(data)
-        PollApp.router.reRenderCurrentView();
         opts.success();
       },
       error: opts.error
@@ -35,7 +33,6 @@ PollApp.Models.User = Backbone.Model.extend({
        url: "/auth/facebook",
        success: function (data) {
          PollApp.currentUser = new PollApp.Models.User(data)
-         PollApp.router.reRenderCurrentView();
          opts.success();
        },
        error: opts.error
