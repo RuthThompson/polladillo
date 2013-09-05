@@ -38,10 +38,13 @@ body{
   width:200px;
 }
 
-/*.medium_width_and_centered{
-  margin:25px 50%;
-  width:auto;
-}*/
+.center{
+  text-align:center;
+  .centered{
+    display:inline-block;
+    text-align:left;
+  }
+}
 
 #header{
   @extend .clearfix;
@@ -94,6 +97,9 @@ form#votePoll,form#editPoll{
 form#editPoll{
   input[type="text"]{
    width:500px; 
+  }
+  #poll_title{
+   /* margin-right:55px;*/
   }
   textarea{
     width:500px;

@@ -16,6 +16,8 @@
 //= require backbone
 //= require jquery.serializeJSON
 //= require chart
+//= require flat-ui
+//= require custom_checkbox_and_radio
 //= require pusher.min
 //= require poll_app
 //= require_tree ../templates

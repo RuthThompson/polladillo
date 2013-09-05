@@ -1,20 +1,23 @@
-<h1><%= poll.escape("title") %> Real Time Results</h1>
-
-<ul>
- <% if(poll.get("questions")){ %>
-    <% var question_num = 0 %>
-    <% poll.get("questions").each(function (question) { %>
-      <li>
-      <h3><%= question.escape("value") %></h3>
-        <ul>
-        <% if(question.get("answers")){ %>
-          <li>
-          <div id="question_<%= question.id %>_bar_graph" class="bar_graph"></div>
-          </li>
-        <% } %>
-        </ul>
-      </li>
-      <% question_num ++ %>  
-    <% }); %>
-  <% } %>
-</ul>
+<div class="center">
+ <div class="centered" >
+  <h1><%= poll.escape("title") %> Real Time Results</h1>
+  <ul>
+   <% if(poll.get("questions")){ %>
+      <% var question_num = 0 %>
+      <% poll.get("questions").each(function (question) { %>
+        <li>
+        <h3><%= question.escape("value") %></h3>
+          <ul>
+          <% if(question.get("answers")){ %>
+            <li>
+            <div id="question_<%= question.id %>_bar_graph" class="bar_graph"></div>
+            </li>
+          <% } %>
+          </ul>
+        </li>
+        <% question_num ++ %>  
+      <% }); %>
+    <% } %>
+  </ul>
+</div>
+</div>
