@@ -17,6 +17,19 @@ PollApp.Models.Poll = Backbone.Model.extend({
       that.set(poll_data)
       on_update ? on_update() : null
     });
-  }
+  }, 
   
+  sendEmails: function (emails, opts) {
+     $.ajax({
+      method: "POST", 
+      data: emails,
+      url: "polls/" + this.id + "/email",
+      success: function (data) {
+        opts.success(this)
+      }, 
+      error: function (responseObj) {
+        opts.error(this, responseObj)
+      }
+     });
+ }
 });

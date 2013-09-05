@@ -23,9 +23,14 @@ PollApp.Routers.Main = Backbone.Router.extend({
   },
   
   newUser: function () {
-    var view = new PollApp.Views.NewUser({model: new PollApp.Models.User()});
+    var view = new PollApp.Views.UserForm({model: new PollApp.Models.User()});
     this._renderView(view);
   }, 
+  
+  editUser: function () {
+    var view = new PollApp.Views.UserForm({model: PollApp.currentUser});
+    this._renderView(view);
+  },
   
   showUser: function (user_id) {
     var that = this; 

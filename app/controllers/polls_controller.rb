@@ -43,7 +43,9 @@ class PollsController < ApplicationController
   end
   
   def destroy
-    
+    @poll = Poll.find_by_id_and_user_id(params[:id], current_user.id)
+    @poll.destroy
+    render :nothing => true
   end
   
 end

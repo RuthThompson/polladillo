@@ -34,11 +34,25 @@ body{
 }
 
 .center{
-  text-align:center;
+  text-align: center;
   .centered{
-    display:inline-block;
-    text-align:left;
+    display: inline-block;
+    text-align: left;
   }
+}
+
+.plain{
+  font-family: sans-serif;
+  color: #34495e;
+  h1,h2,h3,h4,h5,h6 {
+    font-family: sans-serif;
+    color: #34495e;
+  }
+  
+}
+
+#header, #content{
+    min-width:600px;
 }
 
 #header{
@@ -46,13 +60,14 @@ body{
   background: $blue1;
   color: #fff;
   padding: 5px 15px 15px;
-  margin-bottom:20px;
-  height:95px;
-  position:fixed;
-  width:100%;
+  margin-bottom: 20px;
+  height: 95px;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
   #header-logo{
-    float:left;
-    width:200px;
+    float: left;
+    width: 200px;
     h1{
       margin: 10px;
       font-size: 45px;
@@ -67,6 +82,7 @@ body{
   #header-login{
    	float:right;
     width:500px;
+    margin-right:45px;
     #topStripeLogIn{
       float:right;
       label{
@@ -115,4 +131,41 @@ form#editPoll{
   .removeAnswer{
     vertical-align: middle;
   }
+}
+
+#error_messages{
+  .error_message{
+    margin:5px 0px;
+    padding: 5px;
+    border:2px solid #e74c3c;
+    color: #e74c3c;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+  }
+}
+
+#error_messages_header{
+  .error_message_header{
+    color: #bd362f;
+  }
+}
+
+.email-preview{
+  border: 2px solid #34495e;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  margin: 10px 0;
+  padding: 10px;
+  width:390px;
+
+}
+
+.emails{
+  textarea#emails{
+    width:400px;
+    height:200px;
+  }
+  
 }

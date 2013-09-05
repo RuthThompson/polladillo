@@ -37,19 +37,24 @@ PollApp.Views.TopStripe = Backbone.View.extend({
         PollApp.router.reRenderCurrentView();
         that.render();
       },
-      error: that.writeErrors
+      error: that.displayErrors
     });
   }, 
   
   logInWithFacebook: function (event) {
      event.preventDefault();
      var that = this;
-     PollApp.currentUser.logInWithFacebook({error: that.writeErrors });
+     PollApp.currentUser.logInWithFacebook();
   },
   
-  writeErrors: function () {
-    console.log("ruth make errors")
-  }
+  displayErrors: function (model, xhr) {
+     var $errorBox = $('#error_messages_header');
+     $errorBox.html("");
+     _.each(xhr.responseJSON, function (error) {
+       $errorBox.append('<div class="error_message_header">' + error + '</div')
+     });    
+   }
+  
   
   
 

@@ -2,7 +2,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessible :password_hash, :session_token, :username, :email, :password, :authorizations_attributes
   validates :session_token, :username, :email, :presence => true
-  validates :email, :uniqueness => true
+  validate :ensure_password_length
   before_validation :ensure_session_token
   has_many :authorizations, :dependent => :destroy
   
@@ -15,11 +15,9 @@ class User < ActiveRecord::Base
   include BCrypt
   
   def self.authenticate_by_email_and_password(email, password)
-    unless password.nil?
-      user = User.find_by_email(email)
-      if user && user.password == password
-        return user
-      end
+    user = User.find_by_email(email)
+    if user && user.password == password
+      return user
     end
   end
   
@@ -27,13 +25,13 @@ class User < ActiveRecord::Base
     uid = auth_hash['uid']
     email = auth_hash[:info][:email]
     name = auth_hash[:info][:name]
-    
     authorization = Authorization.find_by_uid(uid)
     if authorization
       user = authorization.user
     else
       user = User.new(  :username => name, 
                         :email => email, 
+                        :password => SecureRandom::urlsafe_base64(15),
                         :authorizations_attributes => [{
                           :provider => "facebook",
                           :uid => uid, 
@@ -41,6 +39,7 @@ class User < ActiveRecord::Base
                           :email => email,
                         }]
                       );
+      user.save
     end
     return user
   end
@@ -50,6 +49,7 @@ class User < ActiveRecord::Base
   end
   
   def password=(new_password)
+    @validation_pass = new_password
     @password = Password.create(new_password)
     self.password_hash = @password
   end
@@ -66,6 +66,12 @@ class User < ActiveRecord::Base
   end
   
   private
+  
+  def ensure_password_length
+    if @validation_pass && @validation_pass.length < 5
+       self.errors.add(:password, 'must be at least six characters')
+    end
+  end
   
   def generate_session_token
     SecureRandom::urlsafe_base64(31)

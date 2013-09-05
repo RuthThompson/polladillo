@@ -1,26 +1,29 @@
 class UsersController < ApplicationController
   
   def create
-    @user = User.new({ #todo -- find out why this has to be written this way-- it shouldn't have to be.  
-      :email => params[:user][:email],
-      :username => params[:user][:username],
-      :password => params[:user][:password]
-    })
-    if @user.save!
+    @user = User.new(params[:user])
+    if @user.save
       login(@user)
       render :json => @user
     else
-      render :json => @user.errors.full_messages
+      render :json => @user.errors.full_messages, :status => 422
     end
   end
   
-  def edit
-    
+  def update
+    @user = current_user
+    @user.assign_attributes(params[:user])
+    if @user.save
+      login(@user)
+      render :json => @user
+    else
+      render :json => @user.errors.full_messages, :status => 422
+    end
   end
   
   def destroy
     current_user.destroy!
-    render :json => "user destroyed"
+    render :nothing => true
   end
   
 end

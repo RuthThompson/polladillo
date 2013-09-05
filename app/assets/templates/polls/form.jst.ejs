@@ -1,10 +1,10 @@
 <% submitValue = poll.isNew() ? "Create Poll" : "Update Poll" ; %>
 <div class="center">
  <div class="centered" >
- <div id="error_messages" >errors here</div>
    <form id="editPoll">
     <% if(!poll.isNew()){ %>
       <input type="hidden" name="poll[id]" value="<%= poll.id %>" >
+      <input type="button" class="btn btn-danger" id="deletePoll" value="Delete Poll" >
     <% } %> 
       <label for="poll_title"><h3>Poll Title</h3></label>
       <input type="text" id="poll_title" class="error" value="<%= poll.escape("title")%>" name="poll[title]">
@@ -20,6 +20,7 @@
       <input type="button" class="btn btn-warning" value="Add Question" id="addQuestion" data-question-num="<%= questionNum %>">
       <br>
       <br>
+      <div id="error_messages" ></div>
       <input  class="btn btn-primary" type="button" value="<%= submitValue %>" id="savePoll" >
     </form>
  </div>

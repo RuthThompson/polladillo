@@ -1,9 +1,14 @@
 class VotesController < ApplicationController
   
   def create
-    @votes = Vote.create!(params[:votes])
-    push_notification_to_poll(@votes.first.poll)
-    render :json => @votes
+    unless params[:votes].nil? 
+      @votes = Vote.create(params[:votes])
+      push_notification_to_poll(@votes.first.poll)
+      render :json => @votes
+    else
+      errors = {errors => ["You must vote on at least one question"]}
+      render :json => errors, :status => 422
+    end
   end
   
   def from_text
@@ -23,6 +28,7 @@ class VotesController < ApplicationController
   end
   
   private
+  
   def push_notification_to_poll(poll)
     @poll = poll
     poll_id = @poll.id

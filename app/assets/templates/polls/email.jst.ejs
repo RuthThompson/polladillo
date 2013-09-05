@@ -1,24 +1,25 @@
-<div class="center">
+<div class="center emails">
  <div class="centered" >
     <h1>Tell your friends about "<%= poll.escape("title") %>"</h1>
     <form id="emailPoll">
       <label for="emails">Enter up to 10 emails (separated by commas)</label>
       <br>
-      <textarea id="poll_title" name="emails[friend_emails]"></textarea>
+      <textarea id="emails" name="emails[friend_emails]"></textarea>
       <p>
-      Your email will look like this: 
+      Your email will say this: 
       </p>
-      <div>
-      <h3>Hey Friend,</h3> 
-      <p>
-      Come take my poll at Polladillo!
-      <h3><a href="http://polladillo.com/#/polls/<%= poll.id %>/vote"> 
+      <div class="plain email-preview">
+        <h3>Hey Friend,</h3> 
+        <p>
+        Come take my poll at Polladillo!
+        <h3><a href="http://polladillo.com/#/polls/<%= poll.id %>/vote"> 
 
-      <%= poll.escape("title") %></a></h3>
-      Sent to you by <%= PollApp.currentUser.escape("username") %> (<%= PollApp.currentUser.escape("email")%>)
-      </p>
+        <%= poll.escape("title") %></a></h3>
+        Sent to you by <%= PollApp.currentUser.escape("username") %> (<%= PollApp.currentUser.escape("email")%>)
+        </p>
       </div>
-       <input type="button" value="Send Emails" id="sendEmails" >
+       <div id="error_messages"></div>
+       <input type="button" class="btn btn-primary" value="Send Emails" id="sendEmails" >
     </form>
-</div>
+  </div>
 </div>

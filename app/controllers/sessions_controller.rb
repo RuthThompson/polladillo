@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       render :json => @user
     else
       errors = {errors => ["Incorrect email or password"]}
-      render :json => errors, :status => 422 # send the errors as a hash
+      render :json => errors, :status => 422 
     end
   end
   

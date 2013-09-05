@@ -12,19 +12,23 @@ PollApp.Views.PollsEmail = Backbone.View.extend({
   
   sendEmails: function (event) {
     event.preventDefault();
-    console.log("here")
     var that = this;
     data = $("#emailPoll").serializeJSON();
-    console.log(data)
     data.emails.poll_id = this.model.id
-    $.ajax({
-     method: "POST", 
-     data: data,
-     url: "polls/" + that.model.id + "/email",
-     success: function (data) {
-       console.log("success")
-     },
-     error: console.log("ruth make an error message")
-   })
+    this.model.sendEmails(data, {
+      success: function (model) {
+         Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
+       },
+       error: that.displayErrors
+    });
+  },
+  
+  displayErrors: function (model, xhr) {
+    var $errorBox = $('#error_messages');
+    $errorBox.html("");
+    _.each(xhr.responseJSON, function (error) {
+      $errorBox.append('<div class="error_message">' + error + '</div')
+    });    
   }
+  
 });

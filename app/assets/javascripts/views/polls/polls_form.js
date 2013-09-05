@@ -1,6 +1,7 @@
 PollApp.Views.PollsForm = Backbone.View.extend({
   events: {
     "click #savePoll": "savePoll", 
+    "click #deletePoll": 'deletePoll',
     "click #addQuestion": "addQuestion", 
     "click .addAnswer": "addAnswer", 
     "click .removeAnswer": "removeAnswer", 
@@ -16,21 +17,30 @@ PollApp.Views.PollsForm = Backbone.View.extend({
   
   savePoll: function (event) {
     event.preventDefault();
+    var that = this;
     data = $("#editPoll").serializeJSON();
     var opts = {
-       success: function (data) {
+       success: function () {
+         wait: true,
          Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
         }, 
-        error: function (responseObj) {
-          console.log("failure -- ruth make an errors view");
-          console.log(responseObj);
+        error: function (model, xhr) {
+          that.displayErrors(model, xhr)
         }
     }
-    PollApp.currentUserPolls.create(data.poll, opts)
+    if (this.model.isNew()){
+      PollApp.currentUserPolls.create(data.poll, opts)
+    }else{
+      this.model.save(data.poll, opts)
+    }
+  },
+  
+  deletePoll: function () {
+    this.model.destroy();
+    Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
   },
   
   addQuestion: function (event) {
-    console.log($(event.target).data("question-num"))
     var questionNum = $(event.target).data("question-num") + 1
     $(event.target).data("question-num", questionNum)
     if(questionNum !== questionNum ){
@@ -70,28 +80,13 @@ PollApp.Views.PollsForm = Backbone.View.extend({
     $answerLi.addClass("hidden");
     var $deleteInput = $('<input type="hidden" name="poll[questions_attributes][' + questionNum + '][answers_attributes]['+ answerNum +'][_destroy]" value="true" >')
     $answerLi.append($deleteInput);
-  },
+  }, 
   
-  
-  
-  
-  
-  // addQuestion: function (event) {
-  //    if(!this.model.get("questions")){
-  //      this.model.set("questions", new PollApp.Collections.Questions());
-  //    }
-  //    this.model.get("questions").add({});
-  //    this.render();
-  //  }, 
-  //  
-  //  addAnswer: function (event) {
-  //    var question_num = parseInt($(event.target).data("question-num"))
-  //    question = this.model.get("questions").at(question_num)
-  //    if(!question.get("answers")){
-  //      question.set("answers", new PollApp.Collections.Answers());
-  //    }
-  //    question.get("answers").add({});
-  //    this.render();
-  //  }
- 
+  displayErrors: function (model, xhr) {
+    var $errorBox = $('#error_messages');
+    $errorBox.html("");
+    _.each(xhr.responseJSON, function (error) {
+      $errorBox.append('<div class="error_message">' + error + '</div')
+    });    
+  }
 });

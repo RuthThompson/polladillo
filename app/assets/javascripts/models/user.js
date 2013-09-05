@@ -9,7 +9,9 @@ PollApp.Models.User = Backbone.Model.extend({
         PollApp.currentUser = new PollApp.Models.User();
         opts.success();
       }, 
-      error: opts.error
+      error: function (responseObj){
+        opts.error(this, responseObj)
+      }
     });
     
   },
@@ -23,7 +25,9 @@ PollApp.Models.User = Backbone.Model.extend({
         PollApp.currentUser = new PollApp.Models.User(data)
         opts.success();
       },
-      error: opts.error
+      error: function (responseObj){
+        opts.error(this, responseObj)
+      }
     })
   }, 
   
