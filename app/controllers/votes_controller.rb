@@ -11,7 +11,7 @@ class VotesController < ApplicationController
         r.Sms "Hey Monkey. I got the message!"
       end
       text = twiml.text
-      render :json => text
+      render :text => text
   end
   
   private
