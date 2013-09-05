@@ -7,11 +7,19 @@ class VotesController < ApplicationController
   end
   
   def from_text
-    twiml = Twilio::TwiML::Response.new do |r|
-        r.Sms "Hey Monkey. I got the message!"
-      end
-      text = twiml.text
-      render :text => text
+    @answer = Answer.find(params[:Body].to_i)
+    if @answer
+      Vote.create({:answer_id => @answer.id})
+      push_notification_to_poll(@answer.poll)
+      twiml = Twilio::TwiML::Response.new do |r|
+          r.Sms "Thanks for voting! 
+                 -- Polladillo"
+        end
+        text = twiml.text
+        render :text => text
+    else
+      render :nothing => true
+    end
   end
   
   private
