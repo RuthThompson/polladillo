@@ -1,25 +1,31 @@
-<h1><%= poll.escape("title") %></h1>
-<form id="votePoll">
-<ul>
- <% if(poll.get("questions")){ %>
-    <% var question_num = 0 %>
-    <% poll.get("questions").each(function (question) { %>
-      <li>
-      <h3><%= question.escape("value") %></h3>
-        <ul>
-        <% if(question.get("answers")){ %>
-          <% question.get("answers").each(function (answer) { %>
-            <li>
-              <input type="radio" name="votes[<%= question_num %>][answer_id]" value="<%= answer.id %>" id="votes_<%= question_num %>_<%= answer.id %>">
-              <label for="votes_<%= question_num %>_<%= answer.id %>"><%= answer.escape("value") %></label>
-            </li>
-          <% }); %>
-        <% } %>
-        </ul>
-      </li>
-      <% question_num ++ %>  
-    <% }); %>
-  <% } %>
-</ul>
-<input type="button" value="Vote" id="submitVote">
-</form>
+<div >
+  <h1><%= poll.escape("title") %></h1>
+  <form id="votePoll">
+  <ul>
+   <% if(poll.get("questions")){ %>
+      <% var question_num = 0 %>
+      <% poll.get("questions").each(function (question) { %>
+        <li>
+        <h3><%= question.escape("value") %></h3>
+          <ul>
+          <% if(question.get("answers")){ %>
+            <% question.get("answers").each(function (answer) { %>
+              <li>
+                <label class="radio" for="votes_<%= question_num %>_<%= answer.id %>">
+                  <span class="icons"><span class="first-icon fui-radio-unchecked"></span>
+                  <span class="second-icon fui-radio-checked"></span></span>
+                  <input type="radio" name="votes[<%= question_num %>][answer_id]" value="<%= answer.id %>" id="votes_<%= question_num %>_<%= answer.id %>">
+                  <%= answer.escape("value") %>
+                  </label>
+              </li>
+            <% }); %>
+          <% } %>
+          </ul>
+        </li>
+        <% question_num ++ %>  
+      <% }); %>
+    <% } %>
+  </ul>
+  <input class="btn btn-primary" type="button" value="Count My Vote!" id="submitVote">
+  </form>
+</div>

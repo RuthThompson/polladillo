@@ -2,8 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$blue1: #0d5bff; 
-$blue2: #276cff;
+$blue1: #5dade2; 
 $yellow: #ffb60d;
 $brown: #b27c00;
 
@@ -11,26 +10,101 @@ body{
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 
+.icons{
+  font-family: 'Flat-UI-Icons';
+}
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
+
 .hidden{
   display:none;
 }
 
+.narrow_and_centered{
+  margin: 25px auto;
+  width:200px;
+}
+
+/*.medium_width_and_centered{
+  margin:25px 50%;
+  width:auto;
+}*/
 
 #header{
-  .clearfix{}
-  background: $blue2;
+  @extend .clearfix;
+  background: $blue1;
   color: #fff;
-  padding: 15px;
+  padding: 5px 15px 15px;
+  margin-bottom:20px;
+  min-height:95px;
   #header-logo{
     float:left;
-    width:50%;
+    width:200px;
     h1{
-      font-size: 35px;
+      margin: 10px;
+      font-size: 45px;
     }
   }
-  #header-login{
-    width:25%;
+  #header-logout{
+    text-align:center;
+    margin-top:15px;
     float:right;
     width:200px;
+  }
+  #header-login{
+   	float:right;
+    width:500px;
+    #topStripeLogIn{
+      float:right;
+      label{
+       display:inline;
+      }
+      input[type='text'], input[type='password']{
+        width:100px;
+        height:5px;
+      }
+    }
+    #log-in-facebook{
+      float: right;
+      clear: both;
+    }
+  }
+}
+
+form#votePoll,form#editPoll{
+  ul{
+      list-style-type: none;
+      margin-left:0px;
+  }
+}
+
+form#editPoll{
+  input[type="text"]{
+   width:500px; 
+  }
+  textarea{
+    width:500px;
+    height:100px;
+  }
+  .removeQuestion{
+    vertical-align: bottom;
+    position:relative;
+    top:-9px;
+  }
+  .removeAnswer{
+    vertical-align: middle;
   }
 }

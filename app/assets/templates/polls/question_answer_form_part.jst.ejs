@@ -2,6 +2,8 @@
 <% if(!answer.isNew()){ %>
   <input type="hidden" name="poll[questions_attributes][<%= questionNum %>][answers_attributes][<%= answerNum %>][id]" value="<%= answer.id %>" >
 <% } %>
+  <p>
   <input type="text" name="poll[questions_attributes][<%= questionNum %>][answers_attributes][<%= answerNum %>][value]" value="<%= answer.escape("value") %>" >
-  <input type="button" class="removeAnswer" value="X" data-answer-num="<%= answerNum %>" data-question-num="<%= questionNum %>" >
+  <input type="button" class="removeAnswer btn btn-danger" value="X" data-answer-num="<%= answerNum %>" data-question-num="<%= questionNum %>" >
+  </p>
 </li>

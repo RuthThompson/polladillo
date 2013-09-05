@@ -1,11 +1,11 @@
-<% submitValue = poll.isNew() ? "Create" : "Update" ; %>
+<% submitValue = poll.isNew() ? "Create Poll" : "Update Poll" ; %>
 <form id="editPoll">
 <% if(!poll.isNew()){ %>
   <input type="hidden" name="poll[id]" value="<%= poll.id %>" >
 <% } %> 
   
-  <label for="poll_title">Title</label>
-  <input id="poll_title" value="<%= poll.escape("title")%>" name="poll[title]">
+  <label for="poll_title"><h3>Poll Title</h3></label>
+  <input type="text" id="poll_title" value="<%= poll.escape("title")%>" name="poll[title]">
   <ul id="questions">
   <% var questionNum = 0 %>
   <% if(poll.get("questions")){ %>
@@ -14,8 +14,10 @@
     <% }); %>
   <% } %>
   </ul>
-  <input type="button" value="Add Question" id="addQuestion" data-question-num="<%= questionNum %>">
- 
-  <input type="button" value="<%= submitValue %>" id="savePoll" >
+  <input type="button" class="btn btn-warning" value="Add Question" id="addQuestion" data-question-num="<%= questionNum %>">
+  <br>
+  <br>
+  <input  class="btn btn-primary" type="button" value="<%= submitValue %>" id="savePoll" >
+  
 
 </form>

@@ -2,9 +2,11 @@
 <% if(!question.isNew()){ %>
    <input type="hidden" name="poll[questions_attributes][<%= questionNum %>][id]" value="<%= question.id %>" >
 <% } %> 
-  <label for="poll_question_value">Question</label>
-  <textarea id="poll_question_value" name="poll[questions_attributes][<%= questionNum %>][value]" ><%= question.escape("value") %></textarea>
-  <input type="button" class="removeQuestion" value="X" data-question-num="<%= questionNum %>" >
+  <p>
+    <label for="poll_question_value">Question</label>
+    <textarea id="poll_question_value" name="poll[questions_attributes][<%= questionNum %>][value]" ><%= question.escape("value") %></textarea>
+    <input type="button" class="removeQuestion btn btn-danger" value="X" data-question-num="<%= questionNum %>" >
+  </p>
   <ul id="answers-<%= questionNum %>" class="answers" >
   <% if(question.get("answers")){ %>
      <% var answerNum = 0 %>
@@ -14,5 +16,5 @@
     <% }); %>
   <% } %>
   </ul>
-  <input type="button" value="Add Answer Choice" class="addAnswer" data-question-num="<%= questionNum %>" >
+  <input type="button" class="addAnswer btn btn-warning" value="Add Choice" data-question-num="<%= questionNum %>" >
 </li>

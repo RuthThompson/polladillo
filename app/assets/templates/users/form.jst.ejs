@@ -1,16 +1,19 @@
 <% submitValue = user.isNew() ? "Sign up" : "Update" %>
-<form id="editUser">
+<div class="narrow_and_centered" >
+  <form id="editUser">
 
-  <label for="user_username">Username</label>
-  <input id="user_username" value="<%= user.escape("username")%>" name="user[username]">
+    <label for="user_username">Username</label>
+    <input type="text" id="user_username" value="<%= user.escape("username")%>" name="user[username]">
   
-  <label for="user_email">Email Address</label>
-  <input type="text" id="user_email" value="<%= user.escape("email")%>" name="user[email]">
+    <label for="user_email">Email Address</label>
+    <input type="text" id="user_email" value="<%= user.escape("email")%>" name="user[email]">
 
 
-  <label for="user_password">Password</label>
-  <input type="password" id="user_password" name="user[password]">
+    <label for="user_password">Password</label>
+    <input type="password" id="user_password" name="user[password]">
+    <br>
   
-  <input type="submit" value="<%= submitValue %>">
+    <input class="btn btn-primary" type="submit" value="<%= submitValue %>">
 
-</form>
+  </form>
+</div>
