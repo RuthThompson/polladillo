@@ -10,7 +10,8 @@ class VotesController < ApplicationController
     twiml = Twilio::TwiML::Response.new do |r|
         r.Sms "Hey Monkey. I got the message!"
       end
-      twiml.text
+      text = twiml.text
+      render :json => text
   end
   
   private
