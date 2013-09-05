@@ -1,13 +1,14 @@
 <% submitValue = poll.isNew() ? "Create Poll" : "Update Poll" ; %>
 <div class="center">
  <div class="centered" >
+ <div id="error_messages" >errors here</div>
    <form id="editPoll">
     <% if(!poll.isNew()){ %>
       <input type="hidden" name="poll[id]" value="<%= poll.id %>" >
     <% } %> 
-
       <label for="poll_title"><h3>Poll Title</h3></label>
-      <input type="text" id="poll_title" value="<%= poll.escape("title")%>" name="poll[title]">
+      <input type="text" id="poll_title" class="error" value="<%= poll.escape("title")%>" name="poll[title]">
+
       <ul id="questions">
       <% var questionNum = 0 %>
       <% if(poll.get("questions")){ %>

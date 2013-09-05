@@ -33,11 +33,6 @@ body{
   display:none;
 }
 
-.narrow_and_centered{
-  margin: 25px auto;
-  width:200px;
-}
-
 .center{
   text-align:center;
   .centered{
@@ -52,7 +47,9 @@ body{
   color: #fff;
   padding: 5px 15px 15px;
   margin-bottom:20px;
-  min-height:95px;
+  height:95px;
+  position:fixed;
+  width:100%;
   #header-logo{
     float:left;
     width:200px;
@@ -85,6 +82,11 @@ body{
       clear: both;
     }
   }
+}
+
+#content{
+  padding-top:145px;
+  
 }
 
 form#votePoll,form#editPoll{

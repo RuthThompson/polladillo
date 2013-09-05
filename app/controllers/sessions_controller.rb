@@ -16,9 +16,10 @@ class SessionsController < ApplicationController
   end
   
   def o_create
+    hash = request.env['omniauth.params']['return_hash']
     @user = User.authenticate_or_create_by_facebook(request.env['omniauth.auth'])
     login(@user)
-    render :json => @user
+    redirect_to "#{root_url}##{hash}"
   end
   
   def destroy

@@ -3,32 +3,32 @@
 </div>
 
   <% if(PollApp.currentUser.id){ %>
-  <div id="header-logout">
-    <p>
-      Hello <%= PollApp.currentUser.escape("username") %>
-    </p>
-    <p>  
-    <input type="button" class="btn btn-primary" value="Log Out" id="logOut" >
-    </p>
-  </div>
-  <% }else{ %>
+<div id="header-logout">
   <p>
+    Hello <%= PollApp.currentUser.escape("username") %>
+  </p>
+  <p>  
+  <input type="button" class="btn btn-primary" value="Log Out" id="logOut" >
+  </p>
+</div>
+<% }else{ %>
+<p>
 
-  <div id="header-login" >
-    <form id="topStripeLogIn">
+<div id="header-login" >
+  <form id="topStripeLogIn">
 
-      <label for="user_email">Email Address</label>
-      <input type="text" id="user_email" name="user[email]">
+    <label for="user_email">Email Address</label>
+    <input type="text" id="user_email" name="user[email]">
 
-      <label for="user_password">Password</label>
-      <input type="password" id="user_password" name="user[password]">
+    <label for="user_password">Password</label>
+    <input type="password" id="user_password" name="user[password]">
 
-      <input type="submit" class="btn btn-primary" value="Log In" id="logIn" >
+    <input type="submit" class="btn btn-primary" value="Log In" id="logIn" >
 
-    </form>
-    <div id="log-in-facebook" >
-    Don't have an account? <a href="#/signup">Sign Up</a>
-    or <input type="button" class="btn btn-primary" value="Log in with Facebook" id="logInWithFacebook" >
-    <% } %>
-    </div>
+  </form>
+  <div id="log-in-facebook" >
+  Don't have an account? <a href="#/signup">Sign Up</a>
+  or <input type="button" class="btn btn-primary" value="Log in with Facebook" id="logInWithFacebook" >
+  <% } %>
   </div>
+</div>

@@ -43,14 +43,8 @@ PollApp.Views.TopStripe = Backbone.View.extend({
   
   logInWithFacebook: function (event) {
      event.preventDefault();
-     var that = this; 
-     PollApp.currentUser.logInWithFacebook({
-      success: function() {
-         PollApp.router.reRenderCurrentView();
-         that.render();
-       },
-       error: that.writeErrors
-     });
+     var that = this;
+     PollApp.currentUser.logInWithFacebook({error: that.writeErrors });
   },
   
   writeErrors: function () {
