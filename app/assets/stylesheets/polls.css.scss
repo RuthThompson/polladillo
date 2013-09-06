@@ -234,6 +234,12 @@ ul.results{
          -moz-border-radius: 6px;
          border-radius: 6px;
        }
+       span.text_prompt{
+          position:relative;
+          top:-4px;
+          left:40px;
+          font-size: 20px;
+       }
     }
   }
 }
