@@ -8,7 +8,8 @@ PollApp.Routers.Main = Backbone.Router.extend({
     "polls/:poll_id/edit": "editPoll", 
     "polls/:poll_id/email": "emailPoll",
     "polls/:poll_id/vote": "votePoll", 
-    "polls/:poll_id/results": "tallyPoll"
+    "polls/:poll_id/results": "tallyPoll",
+    ":anything_else": "four04"
   }, 
   
   initialize: function (opts) {
@@ -24,19 +25,24 @@ PollApp.Routers.Main = Backbone.Router.extend({
   },
   
   refreshLayout: function() {
-    delete this.currentUserPolls;
+    delete PollApp.currentUserPolls;
     this.reRenderCurrentView();
     this.header.render();
   },
   
   refreshLogin: function () {
-     delete this.currentUserPolls;
+     delete PollApp.currentUserPolls;
      this.header.render();
   },
   
   home: function () {
     var view = new PollApp.Views.Home();
     this._renderView(view);
+  },
+  
+  four04: function () {
+     var view = new PollApp.Views.Four04();
+     this._renderView(view);
   },
   
   newUser: function () {

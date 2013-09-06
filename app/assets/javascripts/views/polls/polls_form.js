@@ -19,20 +19,26 @@ PollApp.Views.PollsForm = Backbone.View.extend({
     event.preventDefault();
     var that = this;
     data = $("#editPoll").serializeJSON();
-    var opts = {
-       success: function () {
-         wait: true,
+    
+    if (this.model.isNew()){
+      var success = function (model) {
+         PollApp.currentUserPolls.add(model);
          Backbone.history.navigate("#/users/" + PollApp.currentUser.id, { trigger: true })
-        }, 
-        error: function (model, xhr) {
-          that.displayErrors(model, xhr)
+        }
+    }else{
+      var success = function () {
+         Backbone.history.navigate("#/users/" + PollApp.currentUser.id, { trigger: true })
         }
     }
-    if (this.model.isNew()){
-      PollApp.currentUserPolls.create(data.poll, opts)
-    }else{
-      this.model.save(data.poll, opts)
+      
+    var opts = {
+       success: success, 
+       error: function (model, xhr) {
+         that.displayErrors(model, xhr)
+       }
     }
+    
+    this.model.save( data.poll, opts )
   },
   
   deletePoll: function () {

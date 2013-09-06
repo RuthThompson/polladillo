@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :session_token, :username, :email, :presence => true
   validate :ensure_password_length
   before_validation :ensure_session_token
+  before_validation :downcase_email
   has_many :authorizations, :dependent => :destroy
   
   has_many :polls, :dependent => :destroy
@@ -80,6 +81,12 @@ class User < ActiveRecord::Base
   def ensure_session_token
     return unless self.session_token.nil?
     self.session_token = generate_session_token
+  end
+  
+  def downcase_email
+    unless self.email.nil?
+      self.email = self.email.downcase
+    end
   end
   
 end
