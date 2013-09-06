@@ -5,7 +5,8 @@ class Answer < ActiveRecord::Base
   
   has_many :votes, :dependent => :destroy, :inverse_of => :answer
   belongs_to :question, :inverse_of => :answers
-  has_one :user, :through => :question
+  has_one :poll, :through => :question
+  has_one :user, :through => :poll
   
   
 end
