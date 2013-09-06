@@ -1,7 +1,7 @@
 <div class="center">
  <div class="centered" >
-  <h1><%= poll.escape("title") %> Real Time Results</h1>
-  <ul>
+  <h1><%= poll.escape("title") %></h1>
+  <ul class="results">
    <% if(poll.get("questions")){ %>
       <% var question_num = 0 %>
       <% poll.get("questions").each(function (question) { %>

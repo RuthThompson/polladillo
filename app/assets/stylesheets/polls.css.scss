@@ -124,10 +124,18 @@ body{
 }
 
 form#votePoll,form#editPoll{
+  text-align:center;
   ul{
+      text-align: left;
       list-style-type: none;
-      margin-left:0px;
+      h3{
+       margin-left:-25px; 
+      }
   }
+  #submitVote{
+    display:inline-block;
+  }
+  
 }
 
 form#editPoll{
@@ -186,4 +194,46 @@ form#editPoll{
     height:200px;
   }
   
+}
+ul.results{
+  list-style-type:none;
+  canvas{
+    float:left;
+  }
+  ul{
+    @extend .clearfix;
+    list-style-type:none;
+  }
+  h3{
+    margin-top:35px;
+  }
+  ul.graph_label{
+    float:left;
+    list-style-type:none;
+    padding: 0;
+    li{
+      line-height:30px;
+      span.data_label_label{
+       position:relative;
+       top:-4px;
+       left: 10px;
+       font-size: 30px; 
+      }
+      span.data_label_count{
+         position:relative;
+         top:-4px;
+         left:10px;
+         font-size: 30px;
+      }
+      .data_label_color{
+         background: #4824c1;
+         height: 20px;
+         width: 20px;
+         display: inline-block;
+         -webkit-border-radius: 6px;
+         -moz-border-radius: 6px;
+         border-radius: 6px;
+       }
+    }
+  }
 }

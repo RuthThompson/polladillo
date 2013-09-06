@@ -4,11 +4,14 @@ PollApp.Views.PollsVote = Backbone.View.extend({
   
   events: {
     "click #submitVote": "votePoll"
-    
   },
   
   render: function () {
-    this.$el.html(this.template({poll: this.model}));
+    this.$el.html(this.template({ poll: this.model }));
+    this.$(".radio").prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
+    this.$(".radio").click( function () {
+          setupLabel();
+    });
     return this
   },
   
