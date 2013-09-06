@@ -9,7 +9,7 @@ PollApp.Models.Poll = Backbone.Model.extend({
   },
   
   listenForUpdates: function (on_update) {
-    var pusher = new Pusher('beb17ccd0585f1c87905');
+    var pusher = new Pusher('aaf4f910f3de9b6b983f');
     var channel = pusher.subscribe('poll_' + this.id );
     var that = this;
     channel.bind('updated', function(data) {

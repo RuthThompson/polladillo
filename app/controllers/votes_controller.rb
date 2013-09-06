@@ -33,7 +33,7 @@ class VotesController < ApplicationController
     @poll = poll
     poll_id = @poll.id
     poll_data = Rabl.render(@poll, "show", :view_path => 'app/views/polls', :format => :json)
-    Pusher.url = "http://beb17ccd0585f1c87905:d080f4f24d4b98dea11e@api.pusherapp.com/apps/53324"
+    Pusher.url = "http://#{ENV['PUSHER_KEY']}:#{ENV['PUSHER_SECRET']}@api.pusherapp.com/apps/#{ENV['PUSHER_APP_ID']}"
     Pusher["poll_#{poll_id}"].trigger('updated', { :poll => poll_data })
   end
 end
