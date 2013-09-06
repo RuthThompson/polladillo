@@ -32,7 +32,6 @@ PollApp.Models.User = Backbone.Model.extend({
   }, 
   
   logInWithFacebook: function (opts) {
-     event.preventDefault();
      var return_hash = window.location.hash.replace('#', '');
      window.location = "/auth/facebook?return_hash="+ return_hash;    
   },

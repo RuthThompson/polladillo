@@ -17,8 +17,9 @@ PollApp.Views.UserForm = Backbone.View.extend({
     data = $(event.currentTarget).serializeJSON()
     this.model.save(data.user, {
        success: function(model){
-         PollApp.currentUser = model;
-         Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
+         PollApp.currentUser = that.model;
+         PollApp.router.refreshLogin();
+         Backbone.history.navigate("#/users/" + PollApp.currentUser.id, { trigger: true })
         }, 
         error: function(model, xhr){
           that.displayErrors(model, xhr)

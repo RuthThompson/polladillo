@@ -18,7 +18,7 @@ PollApp.Views.PollsVote = Backbone.View.extend({
     var that = this;
     var opts = {
        success: function () {
-         Backbone.history.navigate("#/polls/" + that.model.id + "/results")
+         Backbone.history.navigate("#/polls/" + that.model.id + "/results", { trigger: true })
         }, 
         error: that.displayErrors
     }

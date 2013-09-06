@@ -22,7 +22,7 @@ PollApp.Views.PollsForm = Backbone.View.extend({
     var opts = {
        success: function () {
          wait: true,
-         Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
+         Backbone.history.navigate("#/users/" + PollApp.currentUser.id, { trigger: true })
         }, 
         error: function (model, xhr) {
           that.displayErrors(model, xhr)
@@ -37,7 +37,7 @@ PollApp.Views.PollsForm = Backbone.View.extend({
   
   deletePoll: function () {
     this.model.destroy();
-    Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
+    Backbone.history.navigate("#/users/" + PollApp.currentUser.id, { trigger: true })
   },
   
   addQuestion: function (event) {

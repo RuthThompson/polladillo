@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  
+  before_filter :require_login, :except => :create
+
   def create
     @user = User.new(params[:user])
     if @user.save

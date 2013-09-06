@@ -17,7 +17,7 @@ PollApp.Views.PollsEmail = Backbone.View.extend({
     data.emails.poll_id = this.model.id
     this.model.sendEmails(data, {
       success: function (model) {
-         Backbone.history.navigate("#/users/" + PollApp.currentUser.id)
+         Backbone.history.navigate("#/users/" + PollApp.currentUser.id, { trigger: true })
        },
        error: that.displayErrors
     });

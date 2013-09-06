@@ -17,13 +17,11 @@ PollApp.Views.TopStripe = Backbone.View.extend({
   }, 
   
   logOut: function (event) {
+    event.preventDefault();
     var that = this; 
     PollApp.currentUser.logOut({
-      success: function() {
-        PollApp.router.reRenderCurrentView();
-        that.render();
-      }, 
-      error: that.writeErrors
+      success: PollApp.router.refreshLayout.bind(PollApp.router),
+      error: that.displayErrors
     })
     
   },
@@ -33,10 +31,7 @@ PollApp.Views.TopStripe = Backbone.View.extend({
     var that = this; 
     var data = $("#topStripeLogIn").serializeJSON();
     PollApp.currentUser.logIn(data, {
-      success: function() {
-        PollApp.router.reRenderCurrentView();
-        that.render();
-      },
+      success: PollApp.router.refreshLayout.bind(PollApp.router),
       error: that.displayErrors
     });
   }, 

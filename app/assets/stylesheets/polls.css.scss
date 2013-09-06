@@ -51,6 +51,10 @@ body{
   
 }
 
+.white{
+  color: #ffffff;
+}
+
 #header, #content{
     min-width:600px;
 }
@@ -96,6 +100,20 @@ body{
     #log-in-facebook{
       float: right;
       clear: both;
+    }
+  }
+  #menu{
+    position: absolute;
+    top: 91px;
+    text-align: right;
+    width:100%;
+    #menu-inner{
+      margin-right:85px;
+       a{
+         color: #fff;
+         font-style: bolder; 
+         text-decoration:none;
+        }
     }
   }
 }

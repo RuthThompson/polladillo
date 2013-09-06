@@ -11,6 +11,7 @@
   <input type="button" class="btn btn-primary" value="Log Out" id="logOut" >
   </p>
 </div>
+<div id="menu"><div id="menu-inner"><a href="#/users/<%= PollApp.currentUser.id %>" >My account</a> <a href="#/polls/new">create a poll</a></div></div>
 <% }else{ %>
 <p>
 
@@ -28,7 +29,7 @@
     
   </form>
   <div id="log-in-facebook" >
-  Don't have an account? <a href="#/signup">Sign Up</a>
+  Don't have an account? <a href="#/signup" class="white" >Sign Up</a>
   or <input type="button" class="btn btn-primary" value="Log in with Facebook" id="logInWithFacebook" >
   <% } %>
   </div>
