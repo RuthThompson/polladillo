@@ -1,4 +1,5 @@
 PollApp.Models.User = Backbone.Model.extend({
+  
   urlRoot: "users", 
   
   logOut: function (opts) {

@@ -6,7 +6,6 @@
  * Released under the MIT license
  * https://github.com/nnnick/Chart.js/blob/master/LICENSE.md
  */
-
 //Define the global Chart Variable as a class.
 window.Chart = function(context){
 
@@ -725,6 +724,7 @@ window.Chart = function(context){
 				ctx.closePath();
 				ctx.fillStyle = data[i].color;
 				ctx.fill();
+				
 				
 				if(config.segmentShowStroke){
 					ctx.lineWidth = config.segmentStrokeWidth;

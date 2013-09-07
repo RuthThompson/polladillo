@@ -11,7 +11,11 @@
   <input type="button" class="btn btn-primary" value="Log Out" id="logOut" >
   </p>
 </div>
-<div id="menu"><div id="menu-inner"><a href="#/users/<%= PollApp.currentUser.id %>" >My account</a> <a href="#/polls/new">create a poll</a></div></div>
+  <div id="menu"><div id="menu-inner">
+    <a class="menu-item" href="#/users/<%= PollApp.currentUser.id %>" >My Account</a> 
+    <a class="menu-item" href="#/polls/new">Create a Poll</a>
+  </div>
+</div>
 <% }else{ %>
 <p>
 

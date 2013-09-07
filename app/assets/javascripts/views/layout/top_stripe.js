@@ -8,13 +8,24 @@ PollApp.Views.TopStripe = Backbone.View.extend({
   template: JST['layout/top_stripe'], 
   
   initialize: function () {
-
+    var that = this;
+    PollApp.router.on('route', that.highlightMenu.bind(that));
   },
   
   render: function () {
-    this.$el.html(this.template())
-    return this
+    this.$el.html(this.template());
+    return this;
   }, 
+  
+  highlightMenu: function () { 
+    this.$('.menu-item').each( function () {
+      $(this).removeClass('current-menu-item');
+      if($(this).attr('href') === window.location.hash) {
+        $(this).addClass('current-menu-item');
+      }
+    });
+    
+  },
   
   logOut: function (event) {
     event.preventDefault();
@@ -22,8 +33,7 @@ PollApp.Views.TopStripe = Backbone.View.extend({
     PollApp.currentUser.logOut({
       success: PollApp.router.refreshLayout.bind(PollApp.router),
       error: that.displayErrors
-    })
-    
+    });   
   },
   
   logIn: function (event) {
@@ -38,7 +48,6 @@ PollApp.Views.TopStripe = Backbone.View.extend({
   
   logInWithFacebook: function (event) {
      event.preventDefault();
-     var that = this;
      PollApp.currentUser.logInWithFacebook();
   },
   
@@ -46,11 +55,8 @@ PollApp.Views.TopStripe = Backbone.View.extend({
      var $errorBox = $('#error_messages_header');
      $errorBox.html("");
      _.each(xhr.responseJSON, function (error) {
-       $errorBox.append('<div class="error_message_header">' + error + '</div')
+       $errorBox.append('<div class="error_message_header">' + error + '</div');
      });    
    }
-  
-  
-  
-
+   
 });

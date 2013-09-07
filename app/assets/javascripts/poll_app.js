@@ -3,15 +3,18 @@ window.PollApp = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function() {
-    this.currentUser = new PollApp.Models.User(JSON.parse($("#currentUser").html()));
-    var $rootEl = $("#content")
-    var $headerEl = $("#header")
-    new PollApp.Routers.Main({$rootEl:$rootEl, $headerEl: $headerEl});
+  initialize: function () {
+    var $div = $('<div></div>');
+    $div.html($('#currentUser').text());
+    var currentUserData = JSON.parse($div.text());
+    this.currentUser = new PollApp.Models.User(currentUserData);
+    var $rootEl = $("#content");
+    var $headerEl = $("#header");
+    new PollApp.Routers.Main({ $rootEl:$rootEl, $headerEl: $headerEl });
     Backbone.history.start();
   }
 };
 
-$(document).ready(function(){
+$(document).ready(function () {
   PollApp.initialize();
 });

@@ -21,7 +21,7 @@ PollApp.Routers.Main = Backbone.Router.extend({
   
   createLayout: function(){
     this.header = new PollApp.Views.TopStripe();
-    this.$headerEl.html(this.header.render().$el)
+    this.$headerEl.html(this.header.render().$el);
   },
   
   refreshLayout: function() {
@@ -31,8 +31,8 @@ PollApp.Routers.Main = Backbone.Router.extend({
   },
   
   refreshLogin: function () {
-     delete PollApp.currentUserPolls;
-     this.header.render();
+    delete PollApp.currentUserPolls;
+    this.header.render();
   },
   
   home: function () {
@@ -41,8 +41,8 @@ PollApp.Routers.Main = Backbone.Router.extend({
   },
   
   four04: function () {
-     var view = new PollApp.Views.Four04();
-     this._renderView(view);
+    var view = new PollApp.Views.Four04();
+    this._renderView(view);
   },
   
   newUser: function () {
@@ -72,12 +72,12 @@ PollApp.Routers.Main = Backbone.Router.extend({
   },
   
   newPoll: function () {
-   if(PollApp.currentUser.id != undefined){
+   if(PollApp.currentUser.id !== undefined){
       var that = this;
       this._withCurrentUserPolls( function(){
         var view = new PollApp.Views.PollsForm({model: new PollApp.Models.Poll()});
         that._renderView(view);
-      })
+      });
     }else{
       Backbone.history.navigate("", {trigger: true});
     }
@@ -112,7 +112,7 @@ PollApp.Routers.Main = Backbone.Router.extend({
   },
   
   emailPoll: function (poll_id){
-    if(PollApp.currentUser.id != null){
+    if(PollApp.currentUser.id !== null){
       var that = this;
       this._withCurrentUserPoll(poll_id, function(poll){ 
         var view = new PollApp.Views.PollsEmail({model: poll});

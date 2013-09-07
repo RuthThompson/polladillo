@@ -7,17 +7,17 @@ PollApp.Views.PollsEmail = Backbone.View.extend({
   
   render: function () {
     this.$el.html(this.template({poll: this.model}));
-    return this
+    return this;
   },
   
   sendEmails: function (event) {
     event.preventDefault();
     var that = this;
-    data = $("#emailPoll").serializeJSON();
-    data.emails.poll_id = this.model.id
+    var data = $("#emailPoll").serializeJSON();
+    data.emails.poll_id = this.model.id;
     this.model.sendEmails(data, {
-      success: function (model) {
-         Backbone.history.navigate("#/users/" + PollApp.currentUser.id, { trigger: true })
+      success: function () {
+         Backbone.history.navigate("#/users/" + PollApp.currentUser.id, { trigger: true });
        },
        error: that.displayErrors
     });
@@ -27,7 +27,7 @@ PollApp.Views.PollsEmail = Backbone.View.extend({
     var $errorBox = $('#error_messages');
     $errorBox.html("");
     _.each(xhr.responseJSON, function (error) {
-      $errorBox.append('<div class="error_message">' + error + '</div')
+      $errorBox.append('<div class="error_message">' + error + '</div');
     });    
   }
   
