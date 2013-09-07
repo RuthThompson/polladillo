@@ -51,6 +51,11 @@ body{
   
 }
 
+.smallLink{
+  font-size:14px;
+  font-weight:500;
+}
+
 .white{
   color: #ffffff;
 }
@@ -128,7 +133,6 @@ body{
 }
 
 form#votePoll,form#editPoll{
-  text-align:center;
   ul{
       text-align: left;
       list-style-type: none;
@@ -136,22 +140,30 @@ form#votePoll,form#editPoll{
        margin-left:-25px; 
       }
   }
+}
+
+form#votePoll{
+  text-align:center;
   #submitVote{
-    display:inline-block;
-  }
-  
+     display:inline-block;
+   }
 }
 
 form#editPoll{
+  min-height:900px;
+  width:600px;
   input[type="text"]{
    width:500px; 
   }
   #poll_title{
-   /* margin-right:55px;*/
+    width:527px;
   }
   textarea{
     width:500px;
     height:100px;
+  }
+  input.answer{
+    width:475px;
   }
   .removeQuestion{
     vertical-align: bottom;
@@ -160,6 +172,12 @@ form#editPoll{
   }
   .removeAnswer{
     vertical-align: middle;
+  }
+  #savePoll{
+    width: 540px;
+  }
+  #error_messages{
+    width: 540px;
   }
 }
 
@@ -247,6 +265,21 @@ ul.results{
           left:40px;
           font-size: 20px;
        }
+    }
+  }
+}
+#pollsIndexBox{
+  padding-top:5px;
+  margin-top:10px;
+  border-top:3px solid #5dade2;
+  #newPollLink{
+   float:right;
+  }
+  ul#pollsIndex{
+    list-style-type: none;
+    margin-top:15px;
+    a{
+     margin-right:15px; 
     }
   }
 }

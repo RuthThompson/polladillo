@@ -1,8 +1,10 @@
 <div class="center">
  <div class="centered" >
-    <p>hi <%= user.escape("username") %></p>
-    <a href="#/polls/new" >New Poll</a> <a href="#/users/<%= user.id %>/edit">Edit Account</a>
-    <p>Your Polls</p>
+    <h2>hi <%= user.escape("username") %> <a class="smallLink" href="#/users/<%= user.id %>/edit">edit</a></h2>
+    
+    <br>
+    <br>
+    <h2>Your Polls</h2>
     <%= JST["polls/index"]({polls: polls}) %>
   </div>
 </div>
