@@ -57,7 +57,7 @@ class VotesController < ApplicationController
   
   def phone_already_voted?(answer_id, phone_number)
     answer = Answer.includes(:phone_numbers).find(answer_id)
-    answer.phone_numbers.each { |p| return true if p.phone_number == p }
+    answer.phone_numbers.each { |p| return true if p.phone_number == phone_number }
     return false
   end
   
