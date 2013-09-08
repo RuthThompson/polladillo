@@ -21,6 +21,33 @@ class VotesController < ApplicationController
     end
   end
   
+  def from_text
+    if(phone_already_voted?(params[:Body].to_i, params[:From]))
+       twiml = Twilio::TwiML::Response.new do |r|
+            r.Sms "Sorry, You can only vote once on each question.
+                   -- Polladillo"
+        end
+        text = twiml.text
+        render :text => text
+    else
+      @answer = Answer.find(params[:Body].to_i)
+      if @answer
+        Vote.create({:answer_id => @answer.id})
+        push_notification_to_poll(@answer.poll)
+        twiml = Twilio::TwiML::Response.new do |r|
+            r.Sms "Thanks for voting! 
+                   -- Polladillo"
+        end
+        text = twiml.text
+        render :text => text
+      else
+        render :nothing => true
+      end
+    end
+  end
+  
+  private
+  
   def ip_already_voted?(answer_ids, ip_address)
    answers = Answer.includes(:ip_addresses).find(answer_ids)
    answers.each do |answer| 
@@ -29,23 +56,13 @@ class VotesController < ApplicationController
    return false
   end
   
-  def from_text
-    @answer = Answer.find(params[:Body].to_i)
-    if @answer
-      Vote.create({:answer_id => @answer.id})
-      push_notification_to_poll(@answer.poll)
-      twiml = Twilio::TwiML::Response.new do |r|
-          r.Sms "Thanks for voting! 
-                 -- Polladillo"
-        end
-        text = twiml.text
-        render :text => text
-    else
-      render :nothing => true
+  def phone_already_voted?(answer_ids, phone_number)
+    answers = Answer.includes(:phone_numbers).find(answer_ids)
+    answers.each do |answer| 
+      answer.phone_number.each { |p| return true if p.phone_number == p }
     end
+    return false
   end
-  
-  private
   
   def push_notification_to_poll(poll)
     @poll = poll
