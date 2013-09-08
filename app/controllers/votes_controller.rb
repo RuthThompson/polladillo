@@ -24,19 +24,18 @@ class VotesController < ApplicationController
   def from_text
     if(phone_already_voted?(params[:Body].to_i, params[:From]))
        twiml = Twilio::TwiML::Response.new do |r|
-            r.Sms "Sorry, You can only vote once on each question.
-                   -- Polladillo"
+            r.Sms "Sorry, You can only vote once on each question. -- Polladillo"
         end
         text = twiml.text
         render :text => text
     else
-      @answer = Answer.find(params[:Body].to_i)
-      if @answer
-        Vote.create({:answer_id => @answer.id})
-        push_notification_to_poll(@answer.poll)
+      answer = Answer.find(params[:Body].to_i)
+      if answer
+        Vote.create({:answer_id => answer.id}) 
+        push_notification_to_poll(answer.poll)
+        PhoneNumber.create({ :phone_number => params[:From], :question_id => answer.question.id })
         twiml = Twilio::TwiML::Response.new do |r|
-            r.Sms "Thanks for voting! 
-                   -- Polladillo"
+            r.Sms "Thanks for voting! -- Polladillo"
         end
         text = twiml.text
         render :text => text
