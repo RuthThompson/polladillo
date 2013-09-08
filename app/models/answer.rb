@@ -7,6 +7,6 @@ class Answer < ActiveRecord::Base
   belongs_to :question, :inverse_of => :answers
   has_one :poll, :through => :question
   has_one :user, :through => :poll
-  
+  has_many :ip_addresses, :through => :question
   
 end

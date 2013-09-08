@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130903193425) do
+ActiveRecord::Schema.define(:version => 20130908003835) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id", :null => false
@@ -38,6 +38,24 @@ ActiveRecord::Schema.define(:version => 20130903193425) do
   add_index "authorizations", ["email"], :name => "index_authorizations_on_email"
   add_index "authorizations", ["uid"], :name => "index_authorizations_on_uid"
   add_index "authorizations", ["user_id"], :name => "index_authorizations_on_user_id"
+
+  create_table "ip_addresses", :force => true do |t|
+    t.integer  "question_id"
+    t.string   "ip_address"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "ip_addresses", ["question_id", "ip_address"], :name => "index_ip_addresses_on_question_id_and_ip_address"
+
+  create_table "phone_numbers", :force => true do |t|
+    t.integer  "question_id"
+    t.string   "phone_number"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "phone_numbers", ["question_id", "phone_number"], :name => "index_phone_numbers_on_question_id_and_phone_number"
 
   create_table "polls", :force => true do |t|
     t.integer  "user_id",    :null => false

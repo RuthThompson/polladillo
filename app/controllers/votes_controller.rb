@@ -1,14 +1,32 @@
 class VotesController < ApplicationController
   
   def create
-    unless params[:votes].nil? 
-      @votes = Vote.create(params[:votes])
-      push_notification_to_poll(@votes.first.poll)
-      render :json => @votes
+    unless params[:votes].nil?
+      if ip_already_voted?(params[:votes].map{ |vote| vote[:answer_id] }, request.remote_ip)
+        errors = { errors => "sorry, you can only vote once on each question" }
+        render :json => errors, :status => 422
+      else
+        @votes = Vote.create(params[:votes])
+        push_notification_to_poll(@votes.first.poll)
+        ip_addresses = []
+        @votes.each do |vote|
+          ip_addresses << {:question_id => vote.question.id, :ip_address => request.remote_ip}
+        end
+        IpAddress.create(ip_addresses)
+        render :json => @votes
+      end
     else
       errors = {errors => ["You must vote on at least one question"]}
       render :json => errors, :status => 422
     end
+  end
+  
+  def ip_already_voted?(answer_ids, ip_address)
+   answers = Answer.includes(:ip_addresses).find(answer_ids)
+   answers.each do |answer| 
+     answer.ip_addresses.each { |ip_a| return true if ip_a.ip_address == ip_address }
+   end
+   return false
   end
   
   def from_text
