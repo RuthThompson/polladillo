@@ -8,5 +8,6 @@ class Answer < ActiveRecord::Base
   has_one :poll, :through => :question
   has_one :user, :through => :poll
   has_many :ip_addresses, :through => :question
+  has_many :phone_numbers, :through => :question
   
 end
