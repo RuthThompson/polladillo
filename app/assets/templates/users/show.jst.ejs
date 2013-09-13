@@ -1,10 +1,18 @@
 <div class="center">
  <div class="centered" >
-    <h2>hi <%= user.escape("username") %> <a class="smallLink" href="#/users/<%= user.id %>/edit">edit</a></h2>
+    <h2>hi <%= user.escape("username") %> 
+      <a class="smallLink do_icon" href="#/users/<%= user.id %>/edit">
+        <span data-toggle='tooltip' data-placement='bottom' data-original-title="Edit" class='fui-new-16'></span>
+      </a>
+    </h2>
     
     <br>
     <br>
-    <h2>Your Polls</h2>
-    <%= JST["polls/index"]({polls: polls}) %>
+    <% if(polls.length === 0){ %>
+      <%= JST["polls/index-none"]() %>
+    <% }else{ %>
+    <%= JST["polls/index"]({polls: polls}) %> 
+    <% } %>
+    
   </div>
 </div>

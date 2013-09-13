@@ -1,13 +1,16 @@
+<h2>Your Polls</h2>
 <div id="pollsIndexBox">
-  <a id="newPollLink" href="#/polls/new" >New Poll</a> 
+  <a id="newPollLink" class="do_icon" href="#/polls/new" ><span class='fui-plus-16' data-toggle='tooltip' data-placement='bottom' title="New Poll"></span></a> 
   <ul id="pollsIndex">
     <% polls.each(function (poll) { %>
-      <li>
+      <li class="poll">
         <h3><%= poll.escape("title") %></h3>
-         <a href="#/polls/<%= poll.id %>/edit" >edit</a>
-         <a href="#/polls/<%= poll.id %>/email" >email</a>
-         <a href="#/polls/<%= poll.id %>/vote" >vote</a>
-         <a href="#/polls/<%= poll.id %>/results">results</a>
+        <div class="do_icons" >
+         <a class="do_icon" href="#/polls/<%= poll.id %>/edit"><span class='fui-new-16' data-toggle='tooltip' title="Edit"></span></a>
+         <a class="do_icon" href="#/polls/<%= poll.id %>/email"><span class='fui-mail-16' data-toggle='tooltip' title="Email Friends"></span></a>
+         <a class="do_icon" href="#/polls/<%= poll.id %>/vote"><span class='fui-checkround-16' data-toggle='tooltip' title="Vote"></span></a>
+         <a class="do_icon" href="#/polls/<%= poll.id %>/results"><span class='fui-eye-16' data-toggle='tooltip' title="See Results"></span></a>
+        </div>
       </li>
     <% }); %>
   </ul>

@@ -4,6 +4,7 @@ PollApp.Views.ShowUser = Backbone.View.extend({
   
   render: function () {
     this.$el.html(this.template({user: this.model, polls: this.collection}))
+    this.$("[data-toggle=tooltip]").tooltip()
     return this
   }
 

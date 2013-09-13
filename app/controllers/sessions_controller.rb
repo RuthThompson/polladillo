@@ -10,16 +10,15 @@ class SessionsController < ApplicationController
       login(@user)
       render :json => @user
     else
-      errors = {errors => ["Incorrect email or password"]}
+      errors = { errors => ["Incorrect email or password"] }
       render :json => errors, :status => 422 
     end
   end
   
   def o_create
-    hash = request.env['omniauth.params']['return_hash']
     @user = User.authenticate_or_create_by_facebook(request.env['omniauth.auth'])
     login(@user)
-    redirect_to "#{root_url}##{hash}"
+    redirect_to "#{root_url}#/users/#{@user.id}"
   end
   
   def destroy

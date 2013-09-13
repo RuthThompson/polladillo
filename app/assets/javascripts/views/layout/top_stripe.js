@@ -41,7 +41,10 @@ PollApp.Views.TopStripe = Backbone.View.extend({
     var that = this; 
     var data = $("#topStripeLogIn").serializeJSON();
     PollApp.currentUser.logIn(data, {
-      success: PollApp.router.refreshLayout.bind(PollApp.router),
+      success: function () {
+        PollApp.router.refreshLayout.bind(PollApp.router)()
+        Backbone.history.navigate('#/users/' + PollApp.currentUser.id)
+      },
       error: that.displayErrors
     });
   }, 

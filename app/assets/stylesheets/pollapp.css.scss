@@ -56,6 +56,16 @@ body{
   font-weight:500;
 }
 
+a.do_icon {
+  text-decoration:none;
+}
+
+.tooltip-inner{
+  width:50px;
+  padding:4px;
+} 
+
+
 .white{
   color: #ffffff;
 }
@@ -292,6 +302,7 @@ ul.results{
   }
 }
 #pollsIndexBox{
+  width:700px;
   padding-top:5px;
   margin-top:10px;
   border-top:3px solid #5dade2;
@@ -305,4 +316,25 @@ ul.results{
      margin-right:15px; 
     }
   }
+  #pollsIndex{
+    .poll{
+      @extend .clearfix;
+      padding:15px 0;
+      border-bottom:1px solid #5dade2;
+      h3{
+        margin:0;
+        width:500px;
+        float:left;
+      }
+      .do_icons{
+        height: 15px;
+        padding: 15px 0;
+        float:right;
+        width:150px;
+      }
+
+    }
+  }
 }
+
+
