@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$blue1: #5dade2; 
+$blue1: #3498db; 
 $yellow: #ffb60d;
 $brown: #b27c00;
 
@@ -65,9 +65,16 @@ a.do_icon {
   padding:4px;
 } 
 
+.btn.btn-giant{
+  padding:25px 50px;
+  a{
+    text-decoration: none;
+    color:#fff;
+  }
+}
 
 .white{
-  color: #ffffff;
+  color: #fff;
 }
 
 #header, #content{
@@ -116,7 +123,7 @@ a.do_icon {
   #header-login{
     margin-top:15px;
    	float:right;
-    width:500px;
+    width:525px;
     margin-right:45px;
     #topStripeLogIn{
       float:right;
@@ -126,10 +133,14 @@ a.do_icon {
       input[type='text'], input[type='password']{
         width:100px;
         height:5px;
+        margin-right:10px;
       }
       #logIn{
         position:relative;
         top: -4px;
+        height: 25px;
+        line-height: 25px;
+        padding: 0 15px;
       }
       #error_messages_header{
         margin-bottom:-15px;
@@ -138,6 +149,12 @@ a.do_icon {
     #log-in-facebook{
       float: right;
       clear: both;
+      #logInWithFacebook{
+        height: 25px;
+        line-height: 25px;
+        padding: 0 15px;
+        margin-left:5px;
+      }
     }
   }
   #menu{
