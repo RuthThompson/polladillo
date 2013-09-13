@@ -31,7 +31,7 @@ class PollsController < ApplicationController
     end
   end
   
-  def update
+  def update#require that poll current_user == current_user_id #this is insecure
       @poll = Poll.includes(:questions => [:answers => [:votes]]).find(params[:id])
       @poll.assign_attributes(params[:poll])
       @poll.user_id = current_user.id
