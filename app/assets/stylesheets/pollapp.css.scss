@@ -296,7 +296,7 @@ ul.results{
     padding: 0;
     max-width: 650px;
     li{
-      @extends .clearfix
+      @extend .clearfix
       line-height: 30px;
       border-bottom: 1px solid #666;
       margin-bottom: 10px;
