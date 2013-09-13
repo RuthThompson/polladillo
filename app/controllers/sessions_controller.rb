@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       login(@user)
       render :json => @user
     else
-      errors = { errors => ["Incorrect email or password"] }
+      errors = {errors => ["Incorrect email or password"]}
       render :json => errors, :status => 422 
     end
   end
