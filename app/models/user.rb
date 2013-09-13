@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   attr_accessible :password_hash, :session_token, :username, :email, :password, :authorizations_attributes
   validates :session_token, :username, :email, :presence => true
   validate :ensure_password_length
+  validates :email, email_format: { message: "must be an email address" }
   before_validation :ensure_session_token
   before_validation :downcase_email
   has_many :authorizations, :dependent => :destroy

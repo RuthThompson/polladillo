@@ -12,6 +12,7 @@ gem 'omniauth-facebook'
 gem 'pusher'
 gem 'twilio-ruby'
 gem 'flatui-rails'
+gem 'validates_email_format_of'
 
 
 group :assets do
