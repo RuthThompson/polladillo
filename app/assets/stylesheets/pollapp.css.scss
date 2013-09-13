@@ -271,6 +271,11 @@ form#editPoll{
   }
   
 }
+
+h3.phone_number{
+  color: #666;
+}
+
 ul.results{
   span.phone_number_number{
     
@@ -290,19 +295,22 @@ ul.results{
     float: left;
     list-style-type: none;
     padding: 0;
+    max-width: 650px;
     li{
       line-height: 30px;
+      border-bottom: 1px solid #34495e;
+      margin-bottom: 10px;
       span.data_label_label{
        position: relative;
        top: -4px;
-       left: 10px;
-       font-size: 30px; 
+       margin-left:10px;
+       font-size: 18px; 
       }
       span.data_label_count{
          position: relative;
-         top: -4px;
          left: 10px;
          font-size: 30px;
+         margin-right: 15px;
       }
       .data_label_color{
          background: #4824c1;
@@ -314,10 +322,12 @@ ul.results{
          border-radius: 6px;
        }
        span.text_prompt{
-          position:relative;
-          top: -4px;
-          left: 40px;
+          position: relative;
           font-size: 20px;
+          position: relative;
+          float: right;
+          margin-left: 25px;
+          color: #666;
        }
     }
   }

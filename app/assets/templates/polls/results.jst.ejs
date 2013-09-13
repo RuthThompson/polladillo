@@ -1,7 +1,7 @@
 <div class="center">
  <div class="centered" >
   <h1><%= poll.escape("title") %></h1>
-  <h3>Text your answers to POLL-100-999 <span class="phone_number_number">(7655 100 999)</span></h3>
+  <h3 class="phone_number">Text your answers to POLL-100-999 <span class="phone_number_number">(7655 100 999)</span></h3>
   <ul class="results">
    <% if(poll.get("questions")){ %>
       <% var question_num = 0 %>

@@ -41,7 +41,7 @@ PollApp.Views.PollsResults = Backbone.View.extend({
         })
          var $label = $('<li class="data_label">')
                    .html('<span class="data_label_label">' + that.graphData[answer.id].label + '</span>')
-                   .prepend('<span class="data_label_count" >(' + that.graphData[answer.id].value + ')</span>')
+                   .prepend('<span class="data_label_count" >' + that.graphData[answer.id].value + '</span>')
                    .prepend('<div class="data_label_color" style="background:' + that.graphData[answer.id].color + '">')
                    
                    .append('<span class="text_prompt" >Text Code: ' + answer.id + '</span>')
