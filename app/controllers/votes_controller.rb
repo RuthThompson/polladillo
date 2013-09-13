@@ -6,7 +6,6 @@ class VotesController < ApplicationController
         errors = { errors => "sorry, you can only vote once on each question" }
         render :json => errors, :status => 422
       else
-      if (true)
         @votes = Vote.create(params[:votes])
         push_notification_to_poll(@votes.first.poll)
         ip_addresses = []
