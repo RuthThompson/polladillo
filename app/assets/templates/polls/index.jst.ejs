@@ -4,7 +4,7 @@
   <ul id="pollsIndex">
     <% polls.each(function (poll) { %>
       <li class="poll">
-        <h3><%= poll.escape("title") %></h3>
+        <h3><a href="#/polls/<%= poll.id %>/results"><%= poll.escape("title") %></a></h3>
         <div class="do_icons" >
          <a class="do_icon" href="#/polls/<%= poll.id %>/edit"><span class='fui-new-16' data-toggle='tooltip' title="Edit"></span></a>
          <a class="do_icon" href="#/polls/<%= poll.id %>/email"><span class='fui-mail-16' data-toggle='tooltip' title="Email Friends"></span></a>

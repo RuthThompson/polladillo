@@ -52,24 +52,24 @@ body{
 }
 
 .smallLink{
-  font-size:14px;
-  font-weight:500;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 a.do_icon {
-  text-decoration:none;
+  text-decoration: none;
 }
 
 .tooltip-inner{
-  width:50px;
-  padding:4px;
+  width: 50px;
+  padding: 4px;
 } 
 
 .btn.btn-giant{
-  padding:25px 50px;
+  padding: 25px 50px;
   a{
     text-decoration: none;
-    color:#fff;
+    color: #fff;
   }
 }
 
@@ -78,7 +78,7 @@ a.do_icon {
 }
 
 #header, #content{
-    min-width:940px;
+    min-width: 940px;
 }
 
 #header{
@@ -94,56 +94,57 @@ a.do_icon {
   #header-logo{
     float: left;
     width: 360px;
-    margin-top:0px;
+    margin-top: 0px;
     h1{
       font-size: 45px;
-      letter-spacing:2px;
+      letter-spacing: 2px;
       margin: 0;
       span{
-       position:relative;
-       top:7px; 
+       position: relative;
+       top: 7px; 
       }
       a{
        color: #fff; 
        text-decoration: none;
-       font-weight:500;
+       font-weight: 500;
       }
     }
     #subheader{
-     margin-left:7px;
+     margin-left: 7px;
      letter-spacing: 9px; 
     }
   }
   #header-logout{
-    text-align:center;
-    margin-top:15px;
-    float:right;
-    width:200px;
+    text-align: center;
+    margin-top: 15px;
+    float: right;
+    width: 200px;
   }
   #header-login{
-    margin-top:15px;
-   	float:right;
-    width:525px;
-    margin-right:45px;
+    margin-top: 15px;
+   	float: right;
+    width: 525px;
+    margin-right: 45px;
     #topStripeLogIn{
-      float:right;
+      float: right;
       label{
-       display:inline;
+       display: inline;
       }
       input[type='text'], input[type='password']{
-        width:100px;
-        height:5px;
-        margin-right:10px;
+        width: 100px;
+        height: 19px;
+        margin-right: 10px;
+        padding: 2px;
       }
       #logIn{
-        position:relative;
+        position: relative;
         top: -4px;
         height: 25px;
         line-height: 25px;
         padding: 0 15px;
       }
       #error_messages_header{
-        margin-bottom:-15px;
+        margin-bottom: -15px;
       }
     }
     #log-in-facebook{
@@ -153,7 +154,7 @@ a.do_icon {
         height: 25px;
         line-height: 25px;
         padding: 0 15px;
-        margin-left:5px;
+        margin-left: 5px;
       }
     }
   }
@@ -161,9 +162,9 @@ a.do_icon {
     position: absolute;
     top: 91px;
     text-align: right;
-    width:100%;
+    width: 100%;
     #menu-inner{
-      margin-right:85px;
+      margin-right: 85px;
        a{
          color: #fff;
          font-style: bolder; 
@@ -173,12 +174,15 @@ a.do_icon {
       a.current-menu-item{
         text-decoration: underline;
       }
+      a.current-menu-item:hover{
+        color: #1abc9c;
+      }
     }
   }
 }
 
 #content{
-  padding-top:145px;
+  padding-top: 145px;
   
 }
 
@@ -187,38 +191,38 @@ form#votePoll,form#editPoll{
       text-align: left;
       list-style-type: none;
       h3{
-       margin-left:-25px; 
+       margin-left: -25px; 
       }
   }
 }
 
 form#votePoll{
-  text-align:center;
+  text-align: center;
   #submitVote{
-     display:inline-block;
+     display: inline-block;
    }
 }
 
 form#editPoll{
-  min-height:900px;
-  width:600px;
+  min-height: 900px;
+  width: 600px;
   input[type="text"]{
-   width:500px; 
+   width: 500px; 
   }
   #poll_title{
-    width:527px;
+    width: 527px;
   }
   textarea{
-    width:500px;
-    height:100px;
+    width: 500px;
+    height: 100px;
   }
   input.answer{
-    width:475px;
+    width: 475px;
   }
   .removeQuestion{
     vertical-align: bottom;
-    position:relative;
-    top:-9px;
+    position: relative;
+    top: -9px;
   }
   .removeAnswer{
     vertical-align: middle;
@@ -233,9 +237,9 @@ form#editPoll{
 
 #error_messages{
   .error_message{
-    margin:5px 0px;
+    margin: 5px 0px;
     padding: 5px;
-    border:2px solid #e74c3c;
+    border: 2px solid #e74c3c;
     color: #e74c3c;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -256,14 +260,14 @@ form#editPoll{
   border-radius: 6px;
   margin: 10px 0;
   padding: 10px;
-  width:390px;
+  width: 390px;
 
 }
 
 .emails{
   textarea#emails{
-    width:400px;
-    height:200px;
+    width: 400px;
+    height: 200px;
   }
   
 }
@@ -273,31 +277,31 @@ ul.results{
   }
   list-style-type:none;
   canvas{
-    float:left;
+    float: left;
   }
   ul{
     @extend .clearfix;
-    list-style-type:none;
+    list-style-type: none;
   }
   h3{
-    margin-top:35px;
+    margin-top: 35px;
   }
   ul.graph_label{
-    float:left;
-    list-style-type:none;
+    float: left;
+    list-style-type: none;
     padding: 0;
     li{
-      line-height:30px;
+      line-height: 30px;
       span.data_label_label{
-       position:relative;
-       top:-4px;
+       position: relative;
+       top: -4px;
        left: 10px;
        font-size: 30px; 
       }
       span.data_label_count{
-         position:relative;
-         top:-4px;
-         left:10px;
+         position: relative;
+         top: -4px;
+         left: 10px;
          font-size: 30px;
       }
       .data_label_color{
@@ -311,43 +315,46 @@ ul.results{
        }
        span.text_prompt{
           position:relative;
-          top:-4px;
-          left:40px;
+          top: -4px;
+          left: 40px;
           font-size: 20px;
        }
     }
   }
 }
 #pollsIndexBox{
-  width:700px;
-  padding-top:5px;
-  margin-top:10px;
-  border-top:3px solid #5dade2;
+  width: 700px;
+  padding-top: 5px;
+  margin-top: 10px;
+  border-top: 3px solid #5dade2;
   #newPollLink{
-   float:right;
+   float: right;
   }
   ul#pollsIndex{
     list-style-type: none;
-    margin-top:15px;
+    margin-top: 15px;
     a{
-     margin-right:15px; 
+     margin-right: 15px; 
     }
   }
   #pollsIndex{
     .poll{
       @extend .clearfix;
-      padding:15px 0;
-      border-bottom:1px solid #5dade2;
+      padding: 15px 0;
+      border-bottom: 1px solid #5dade2;
       h3{
-        margin:0;
-        width:500px;
-        float:left;
+        margin: 0;
+        width: 500px;
+        float: left;
+        a{
+          text-decoration: none;
+        }
       }
       .do_icons{
         height: 15px;
         padding: 15px 0;
-        float:right;
-        width:150px;
+        float: right;
+        width: 150px;
       }
 
     }
