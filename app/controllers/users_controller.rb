@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       render :json => @user.errors.full_messages, :status => 422
     end
   end
-  
+   
   def update
     @user = current_user
     @user.assign_attributes(params[:user])

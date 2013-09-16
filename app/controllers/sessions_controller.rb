@@ -15,6 +15,12 @@ class SessionsController < ApplicationController
     end
   end
   
+  def create_guest
+    @user = User.new_guest()
+    login(@user)
+    render :json => @user
+  end
+  
   def o_create
     @user = User.authenticate_or_create_by_facebook(request.env['omniauth.auth'])
     login(@user)

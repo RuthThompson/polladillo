@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908003835) do
+ActiveRecord::Schema.define(:version => 20130916195716) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id", :null => false
@@ -76,15 +76,19 @@ ActiveRecord::Schema.define(:version => 20130908003835) do
   add_index "questions", ["poll_id"], :name => "index_questions_on_poll_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",         :null => false
-    t.string   "username",      :null => false
+    t.string   "email",                                       :null => false
+    t.string   "username",                                    :null => false
     t.string   "password_hash"
-    t.string   "session_token", :null => false
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.string   "session_token",                               :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.string   "email_verification_token"
+    t.boolean  "email_verified"
+    t.boolean  "guest",                    :default => false, :null => false
   end
 
   add_index "users", ["email", "password_hash"], :name => "index_users_on_email_and_password_hash"
+  add_index "users", ["email_verification_token"], :name => "index_users_on_email_verification_token"
   add_index "users", ["session_token"], :name => "index_users_on_session_token"
 
   create_table "votes", :force => true do |t|

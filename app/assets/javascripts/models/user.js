@@ -32,6 +32,20 @@ PollApp.Models.User = Backbone.Model.extend({
     })
   }, 
   
+  logInAsGuest: function (opts) {
+    $.ajax({
+      url: "session/guest", 
+      method: "POST", 
+      success: function (data) {
+        PollApp.currentUser = new PollApp.Models.User(data)
+        opts.success();
+      },
+      error: function (responseObj){
+        opts.error(this, responseObj)
+      }
+    })
+  },
+  
   logInWithFacebook: function (opts) {
      var return_hash = window.location.hash.replace('#', '');
      window.location = "/auth/facebook?return_hash="+ return_hash;    

@@ -1,7 +1,9 @@
 require 'bcrypt'
 class User < ActiveRecord::Base
-  attr_accessible :password_hash, :session_token, :username, :email, :password, :authorizations_attributes
+  attr_accessible :password_hash, :session_token, :username, :email,
+                  :password, :authorizations_attributes, :guest
   validates :session_token, :username, :email, :presence => true
+  validates :email, :uniqueness => true
   validate :ensure_password_length
   validates :email, email_format: { message: "must be an email address" }
   before_validation :ensure_session_token
@@ -13,6 +15,9 @@ class User < ActiveRecord::Base
   has_many :answers, :through => :questions
   
   accepts_nested_attributes_for :authorizations
+  
+  scope :guest, -> { where(guest: true) }
+  scope :expired_guest, -> { guest.where("created_at < ? ", 3.hours.ago)}
   
   include BCrypt
   
@@ -31,19 +36,51 @@ class User < ActiveRecord::Base
     if authorization
       user = authorization.user
     else
-      user = User.new(  :username => name, 
-                        :email => email, 
-                        :password => SecureRandom::urlsafe_base64(15),
-                        :authorizations_attributes => [{
-                          :provider => "facebook",
-                          :uid => uid, 
-                          :name => name, 
-                          :email => email,
-                        }]
-                      );
+      user = User.new(  
+        :username => name, 
+        :email => email, 
+        :password => SecureRandom::urlsafe_base64(15),
+        :authorizations_attributes => [{
+          :provider => "facebook",
+          :uid => uid, 
+          :name => name, 
+          :email => email,
+        }]
+      );
       user.save
     end
     return user
+  end
+  
+  def self.new_guest
+    User.expired_guest.each(&:destroy); #heroku charges for workers -- this is almost the same.  
+        
+    user = self.create({ 
+      :guest => true, 
+      :username => 'Guest', 
+      :password => SecureRandom::urlsafe_base64(15), 
+      :email => "guest@#{SecureRandom::hex(10)}.com" 
+      })
+      
+    poll = Poll.create({
+      :user_id => user.id,
+      :title => "Sample Poll", 
+      :questions_attributes => [{
+        :value => "How do you use Polladillo?",
+        :answers_attributes => [
+          {:value => "To poll my students during lecture"}, 
+          {:value => "To poll my friends about social events"}, 
+          {:value => "Other"}
+        ]
+      }]
+      }) 
+      
+    poll.questions.includes(:answers).each do |question|
+      question.answers.each do |answer|
+        Vote.create({ :answer_id => answer.id })
+      end
+    end
+    user
   end
 
   def password
