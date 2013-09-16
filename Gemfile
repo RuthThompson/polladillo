@@ -13,6 +13,7 @@ gem 'pusher'
 gem 'twilio-ruby'
 gem 'flatui-rails'
 gem 'validates_email_format_of'
+gem 'newrelic_rpm'
 
 
 group :assets do
