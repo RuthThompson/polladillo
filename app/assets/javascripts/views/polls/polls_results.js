@@ -1,16 +1,28 @@
 PollApp.Views.PollsResults = Backbone.View.extend({
+  
+  events: {
+    "click #changeColors": "changeColors"
+  },
+  
   template: JST['polls/results'], 
   initialize: function (){
     var that = this; 
     this.listenTo(that.model, 'change', that.drawGraphs.bind(that));
     this.model.listenForUpdates();
   },
+  
   render: function () {
     this.$el.html(this.template({poll: this.model}))
     this.alreadyDrawn = false;
     this.drawGraphs();
+    this.$("[data-toggle=tooltip]").tooltip()
    
     return this
+  },
+  
+  changeColors: function () {
+    this.alreadyDrawn = false;
+    this.drawGraphs();
   },
   
   refreshGraphData: function () {

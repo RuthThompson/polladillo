@@ -88,8 +88,6 @@ a.do_icon {
   padding: 5px 15px 15px;
   margin-bottom: 20px;
   height: 95px;
-  position: fixed;
-  z-index: 100;
   width: 100%;
   #header-logo{
     float: left;
@@ -186,7 +184,6 @@ a.do_icon {
 }
 
 #content{
-  padding-top: 145px;
   
 }
 
@@ -278,6 +275,16 @@ form#editPoll{
 
 h3.phone_number{
   color: #666;
+}
+
+
+a#changeColors{
+  img{
+    margin-left:15px;
+    width:16px;
+    height:16px;
+  }
+  
 }
 ul.results{
   span.phone_number_number{

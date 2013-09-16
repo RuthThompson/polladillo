@@ -1,12 +1,12 @@
 <div class="center">
  <div class="centered" >
-  <h1><%= poll.escape("title") %></h1>
-  <h3 class="phone_number">Text your answers to POLL-100-999 <span class="phone_number_number">(7655 100 999)</span></h3>
+  <h1><%= poll.escape("title") %><a id="changeColors" data-toggle='tooltip' data-placement='bottom' title="Change Colors"><img src="/assets/brush.png" /></a></h1>
   <ul class="results">
    <% if(poll.get("questions")){ %>
       <% var question_num = 0 %>
       <% poll.get("questions").each(function (question) { %>
         <li>
+         <h3 class="phone_number">Text your answers to POLL-100-999 <span class="phone_number_number">(7655 100 999)</span></h3>
         <h3><%= question.escape("value") %></h3>
           <ul>
           <% if(question.get("answers")){ %>
