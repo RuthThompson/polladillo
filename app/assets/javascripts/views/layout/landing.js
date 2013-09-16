@@ -1,6 +1,6 @@
 PollApp.Views.Home = Backbone.View.extend({
   events: {
-    "click #loginAsGuest": "loginAsGuest"  
+    "click #loginAsGuest": "loginAsGuest"
   },
   
   template: JST['layout/landing'], 

@@ -1,4 +1,8 @@
 <div class="center emails">
+<% if(PollApp.currentUser.get('guest')){ %>
+  <div id="guest_forbidden">Sorry, Guests can not send emails.  Please create an account to use this feature.  </div>
+  <br>
+<% } %> 
  <div class="centered" >
     <h1>Tell your friends about "<%= poll.escape("title") %>"</h1>
     <form id="emailPoll">
@@ -15,7 +19,7 @@
         <h3><a href="http://polladillo.com/#/polls/<%= poll.id %>/vote"> 
 
         <%= poll.escape("title") %></a></h3>
-        Sent to you by <%= PollApp.currentUser.escape("username") %> (<%= PollApp.currentUser.escape("email")%>)
+        Sent to you by <%= PollApp.currentUser.escape("username") %> (<%= PollApp.currentUser.get('guest') ? 'guest@polladillo.com' : PollApp.currentUser.escape("email")%>)
         </p>
       </div>
        <div id="error_messages"></div>

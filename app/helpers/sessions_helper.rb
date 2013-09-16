@@ -25,4 +25,10 @@ module SessionsHelper
     end
   end
   
+  def not_for_guests
+    if !logged_in? || current_user.guest
+       render :json => "Sorry, this feature is not available for guests", :status => :forbidden
+    end
+  end
+  
 end

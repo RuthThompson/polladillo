@@ -15,6 +15,6 @@ window.PollApp = {
   }
 };
 
-$(document).ready(function () {
+$(function () {
   PollApp.initialize();
 });

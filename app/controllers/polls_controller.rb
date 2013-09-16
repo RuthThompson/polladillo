@@ -1,5 +1,7 @@
 class PollsController < ApplicationController
   before_filter :require_login, :except => :show
+  before_filter :not_for_guests, :only => :email
+  
   def index
     @polls = current_user.polls.includes(:questions => [:answers => [:votes]])
   end

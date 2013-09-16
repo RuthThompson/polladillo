@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :authorizations
   
   scope :guest, -> { where(guest: true) }
-  scope :expired_guest, -> { guest.where("created_at < ? ", 3.hours.ago)}
+  scope :expired_guest, -> { guest.where("created_at < ? ", 3.hours.ago) }
   
   include BCrypt
   
@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   end
   
   def as_json(opts)
-    opts[:only] = ["username", "id", "email"]
+    opts[:only] = ["username", "id", "email", "guest"]
     super(opts)
   end
   

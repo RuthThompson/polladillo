@@ -183,8 +183,14 @@ a.do_icon {
   }
 }
 
-#content{
-  
+#guest_forbidden{
+  margin: 5px 0px;
+  padding: 5px;
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
 }
 
 form#votePoll,form#editPoll{
