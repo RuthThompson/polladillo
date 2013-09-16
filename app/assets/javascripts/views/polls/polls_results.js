@@ -58,17 +58,15 @@ PollApp.Views.PollsResults = Backbone.View.extend({
   
   drawGraphs: function(){
     var that = this;
+    var options = (that.alreadyDrawn) ? {animation: false} : { animationEasing: 'easeOutQuart' } ;
     var gData = this.refreshGraphData()
     this.model.get("questions").each(function(question){
-      var $canvas = $('<canvas id="pieGraph' + question.id + '" width="200" height="200"></canvas>');
+      var $canvas = $('<canvas id="pieGraph' + question.id + '" width="200" height="200" style="width:200px; height:200px;"></canvas>');
       var ctx = $canvas.get(0).getContext('2d');
       var $questionBox = that.$("#question_" + question.id + "_bar_graph")
       $questionBox.html($canvas);
       
       var data = gData.questionsData[question.id];
-      var options = { 
-          animation: false, 
-      }
       PollApp.a = new Chart(ctx).Pie(data, options)
       $questionBox.append(gData.questionsLabels[question.id])
     });
