@@ -1,3 +1,4 @@
+
 require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessible :password_hash, :session_token, :username, :email,
@@ -53,8 +54,7 @@ class User < ActiveRecord::Base
   end
   
   def self.new_guest
-    User.expired_guest.each(&:destroy); #heroku charges for workers -- this is almost the same.  
-        
+    User.expired_guest.each(&:destroy); #heroku charges for workers -- this is almost the same. 
     user = self.create({ 
       :guest => true, 
       :username => 'Guest', 
