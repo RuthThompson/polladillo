@@ -387,5 +387,50 @@ ul.results{
     }
   }
 }
+#hero {
+	max-width:1140px;
+	min-width:940px ;
+	width:100%;
+	margin:80px auto;
 
-
+  .colthirds {
+	  float:left;
+	  width:30%;
+	  text-align:center;
+    .imagewrap {
+    	height:96px;
+    	display:block;
+    }
+    h2 {
+    	font-size:32px;
+    	font-weight:700;
+    	color:#565656;
+      margin-top:10px;
+    }
+    h4 {
+    	font-size:20px;
+    	line-height:30px;
+    	margin-top:10px;
+    	color:#777;
+    }
+    a {
+    	display:inline-block;
+    	margin-top:20px;
+    	font-size:28px;
+    	color:#3398DA;
+    	text-decoration:none;
+    }
+    a:hover {
+    	text-decoration:underline;
+    }
+  }
+  .colthirds.col2 {
+	  padding-left:5%;
+	  padding-right:5%;
+  }
+  .colthirds.col1 {
+    img{
+      margin-top:10px;
+    }
+  }
+}
