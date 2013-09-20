@@ -3,13 +3,18 @@ class VotesController < ApplicationController
   def create
     unless params[:votes].nil?
       answer_ids = params[:votes].map{ |vote| vote[:answer_id] }
-      if ip_already_voted?(params[:votes].map{ |vote| vote[:answer_id] }, request.remote_ip)
-        errors = { errors => "sorry, you can only vote once on each question" }
-        render :json => errors, :status => 422
-      # else
-      # if cookie_already_voted?(answer_ids, cookies[:voted_on])
+      
+      #TODO: make this an option for poll makers -- guard against double voting by cookie or by ip
+      # (ip is probematic for lectures as all users will be on the same ip, but cookies are easier to get around)
+      # if ip_already_voted?(params[:votes].map{ |vote| vote[:answer_id] }, request.remote_ip)
       #   errors = { errors => "sorry, you can only vote once on each question" }
       #   render :json => errors, :status => 422
+      # # else
+
+      
+      if cookie_already_voted?(answer_ids)
+        errors = { errors => "sorry, you can only vote once on each question" }
+        render :json => errors, :status => 422
       else
         @votes = Vote.create(params[:votes])
         push_notification_to_poll(@votes.first.poll)
@@ -17,7 +22,7 @@ class VotesController < ApplicationController
         @votes.each do |vote|
           ip_addresses << {:question_id => vote.question.id, :ip_address => request.remote_ip}
         end
-        # set_voted_on_cookies(answer_ids)
+        set_voted_on_cookies(answer_ids)
         IpAddress.create(ip_addresses)
         render :json => @votes
       end
@@ -74,11 +79,10 @@ class VotesController < ApplicationController
     end
   end
   
-  def cookie_already_voted?(answer_ids, cookie)
-     return false unless cookie
+  def cookie_already_voted?(answer_ids)
      answers = Answer.includes(:question).find(answer_ids)
      answers.each do |answer| 
-        return true if cookies["voted_on_#{answer.question_id}".to_sym]
+        return true if cookies["voted_on_#{answer.question_id}".to_sym] == 'true'
      end
      false
   end
