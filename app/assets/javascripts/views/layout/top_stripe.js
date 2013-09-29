@@ -1,8 +1,8 @@
 PollApp.Views.TopStripe = Backbone.View.extend({
   events: {
     "click #logOut": "logOut", 
-    "submit #topStripeLogIn" : "logIn", 
-    "click #logInWithFacebook" : "logInWithFacebook"
+    "submit #topStripeLogIn": "logIn", 
+    "click #logInWithFacebook": "logInWithFacebook"
   }, 
 
   template: JST['layout/top_stripe'], 
@@ -42,8 +42,8 @@ PollApp.Views.TopStripe = Backbone.View.extend({
     var data = $("#topStripeLogIn").serializeJSON();
     PollApp.currentUser.logIn(data, {
       success: function () {
-        PollApp.router.refreshLayout.bind(PollApp.router)()
-        Backbone.history.navigate('#/users/' + PollApp.currentUser.id)
+        PollApp.router.refreshLayout.bind(PollApp.router)();
+        Backbone.history.navigate('#/users/' + PollApp.currentUser.id);
       },
       error: that.displayErrors
     });

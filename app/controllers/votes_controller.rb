@@ -94,4 +94,5 @@ class VotesController < ApplicationController
     Pusher.url = "http://#{ENV['PUSHER_KEY']}:#{ENV['PUSHER_SECRET']}@api.pusherapp.com/apps/#{ENV['PUSHER_APP_ID']}"
     Pusher["poll_#{poll_id}"].trigger('updated', { :poll => poll_data })
   end
+  
 end

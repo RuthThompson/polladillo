@@ -12,7 +12,7 @@ PollApp.Views.PollsVote = Backbone.View.extend({
     this.$(".radio").click( function () {
           setupLabel();
     });
-    return this
+    return this;
   },
   
   votePoll: function () {
@@ -21,18 +21,18 @@ PollApp.Views.PollsVote = Backbone.View.extend({
     var that = this;
     var opts = {
        success: function () {
-         Backbone.history.navigate("#/polls/" + that.model.id + "/results", { trigger: true })
+         Backbone.history.navigate("#/polls/" + that.model.id + "/results", { trigger: true });
         }, 
         error: that.displayErrors
-    }
-    votes.create(data, opts)
+    };
+    votes.create(data, opts);
   }, 
   
   displayErrors: function (model, xhr) {
      var $errorBox = $('#error_messages');
      $errorBox.html("");
      _.each(xhr.responseJSON, function (error) {
-       $errorBox.append('<div class="error_message">' + error + '</div')
+       $errorBox.append('<div class="error_message">' + error + '</div');
      });    
    }
 

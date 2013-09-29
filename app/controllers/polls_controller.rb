@@ -24,8 +24,6 @@ class PollsController < ApplicationController
     @poll = Poll.find_by_id_and_user_id(params[:emails][:poll_id], current_user.id)
     if @poll && params[:emails][:friend_emails]
       friend_emails = params[:emails][:friend_emails].split(",").map(&:strip).first(10)
-      p friend_emails
-      friend_emails
       FriendMailer.friend_email(@poll, friend_emails).deliver!
       render :nothing => true
     else

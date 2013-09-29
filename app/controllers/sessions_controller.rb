@@ -31,4 +31,5 @@ class SessionsController < ApplicationController
     logout
     render :nothing => true
   end
+  
 end
